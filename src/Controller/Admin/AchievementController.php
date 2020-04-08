@@ -61,9 +61,9 @@ class AchievementController extends AbstractController
                 $this->addFlash('success', "Le challenge est enregistré");
 
                 return $this->redirectToRoute('app_admin_achievement_index');
+            } else {
+                $this->addFlash('error', 'Le formulaire contient des erreurs');
             }
-        } else {
-            $this->addFlash('error', 'Le formulaire contient des erreurs');
         }
 
 

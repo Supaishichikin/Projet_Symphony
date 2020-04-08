@@ -59,8 +59,31 @@ CategoryController extends AbstractController
 
                 $this->addFlash('success', 'La catégories est enregistrée');
 
-                return $this->redirectToRoute();
+                return $this->redirectToRoute('app_admin_category_index');
+            } else {
+                $this->addFlash('error', 'Le formulaire contient des erreurs' );
             }
         }
+
+        return $this->render(
+            'Admin/category/edit.html.twig',
+            [
+                'form' => $form->createView()
+            ]
+
+        );
+    }
+
+    /**
+     * @Route("/suppression/{id}", requirements={"id": "\d+"})
+     */
+    public function delete(EntityManagerInterface $manager, Category $category)
+    {
+        $manager->remove($category);
+        $manager->flush();
+
+        $this->addFlash('success', "La catégorie à été supprimé" );
+
+        return $this->redirectToRoute('app_admin_category_index');
     }
 }

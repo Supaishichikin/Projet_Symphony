@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block body %}
+    <div class="container">
+        {{ form_start(form) }}
+
+        {{ form_row(form.name) }}
+        {{ form_row(form.description) }}
+
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary">
+                Enregistrer
+            </button>
+            <a href="{{ path('app_admin_category_index') }}" class="btn btn-outline-secondary">
+                Retour
+            </a>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+
+

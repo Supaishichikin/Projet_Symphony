@@ -5,6 +5,9 @@
 {% block body %}
     <div class="container">
         <h1>Gestion Categorie</h1>
+        <a href="{{ path('app_admin_category_edit') }}" class="btn btn-outline-primary mb3">
+            Créer une catégorie
+        </a>
         <table class="table table-striped mt-2">
             <tr class="table-dark">
                 <th>id</th>
@@ -17,10 +20,10 @@
                 <td>{{ category.id }}</td>
                 <td>{{ category.name }}</td>
                 <td>{{ category.description }}</td>
-                <td><a href="#" class="btn btn-primary">
+                <td><a href="{{ path('app_admin_category_edit', {'id': category.id }) }}" class="btn btn-primary">
                         Modifier
                     </a>
-                    <a href="#" class="btn btn-danger">
+                    <a href="{{ path('app_admin_category_delete', {'id': category.id }) }}" class="btn btn-danger">
                         Supprimer
                     </a>
                 </td>

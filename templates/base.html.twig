@@ -8,6 +8,18 @@
         {% endblock %}
     </head>
     <body>
+        {# affichage des messages flash #}
+        {% for type, messages in app.session.flashBag.all %}
+            {# pour la classe alert-danger de bootstrap #}
+            {% if type == 'error' %}
+                {% set type = 'danger' %}
+            {% endif %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type }} mt-2">
+                    {{ message|raw }}
+                </div>
+            {% endfor %}
+        {% endfor %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

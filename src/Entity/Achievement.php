@@ -27,7 +27,7 @@ class Achievement
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\category", inversedBy="achievements")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="achievements")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin CategoryController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Gestion Categorie</h1>
+        <table class="table table-striped mt-2">
+            <tr class="table-dark">
+                <th>id</th>
+                <th>name</th>
+                <th>description</th>
+                <th>Modification</th>
+            </tr>
+            {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>{{ category.description }}</td>
+                <td><a href="#" class="btn btn-primary">
+                        Modifier
+                    </a>
+                    <a href="#" class="btn btn-danger">
+                        Supprimer
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+{% endblock %}

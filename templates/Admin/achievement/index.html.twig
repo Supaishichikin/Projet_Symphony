@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin AchievementController{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Gestion Activitées</h1>
+        <a href="{{ path('app_admin_achievement_edit') }}" class="btn btn-outline-primary">Ajouter un Challenge</a>
+        <table class="table table-striped mt-2">
+            <tr class="table-dark">
+                <th>id</th>
+                <th>id catégorie</th>
+                <th>name</th>
+                <th>description</th>
+                <th>Modification</th>
+            </tr>
+            {% for achievement in achievements %}
+                <tr>
+                    <td>{{ achievement.id }}</td>
+                    <td>{{ achievement.category.getId() }}</td>
+                    <td>{{ achievement.name }}</td>
+                    <td>{{ achievement.description }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_achievement_edit', {'id': achievement.id}) }}" class="btn btn-primary">Modifier</a>
+                        <a href="{{ path('app_admin_achievement_delte', {'id': achievement.id}) }}" class="btn btn-danger">Suprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

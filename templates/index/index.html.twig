@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Accueil{% endblock %}
+
+{% block body %}
+    <h1>Work in progress, ma gueule</h1>
+
+    <div class="row">
+
+            {% if app.user is null %}
+                <div class="col-6">
+                    <h2>Inscription</h2>
+                    {{ form_start(form) }}
+                    {{ form_row(form.pseudo) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.plainPassword) }}
+                    <button class="btn btn-success" type="submit">S'inscrire</button>
+                    {{ form_end(form) }}
+                </div>
+                <div class="col-6">
+                    <h2>Connexion</h2>
+                    <form method="post" action="{{ path('app_index_login') }}">
+                        <div class="form-group">
+                            <label for="connexion_pseudo">Pseudo</label>
+                            <input id="connexion_pseudo" type="text" name="_username" class="form-control" value="{{ last_username }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="connexion_password">Mot de passe</label>
+                            <input id="connexion_password" type="password" name="_password" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-success">
+                            Se connecter
+                        </button>
+                    </form>
+                </div>
+            {% else %}
+                <h3>AH mais sapristi te voilà sacrément connecté.e, <span style="color: red;">{{ app.user.pseudo }}</span></h3>
+                <a class="ml-2 btn btn-warning" href="{{ path('app_index_logout') }}">
+                    Se déconnecter
+                </a>
+            {% endif %}
+
+    </div>
+
+{% endblock %}

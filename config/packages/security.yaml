@@ -5,17 +5,27 @@ security:
             algorithm: auto
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        users_in_memory: { memory: null }
+        database:
+            entity:
+                class: App\Entity\User
+                property: pseudo
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: lazy
-            provider: users_in_memory
+            provider: database
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            form_login:
+                login_path: app_index_index
+                check_path: app_index_login
+
+            logout:
+                path: app_index_logout
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true

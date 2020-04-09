@@ -8,6 +8,24 @@
         {% endblock %}
     </head>
     <body>
+    {% if is_granted('ROLE_ADMIN') %}
+        <nav class="navbar navbar-exepend-lg navbar-dark bg-dark">
+            <a class="navbar-link text-white" href="{{ path('app_admin_achievement_index') }}">Admin</a>
+            <a class="nav-link text-white" href="{{ path('app_admin_achievement_index') }}">Gestion des Activitées</a>
+            <a class="nav-link text-white" href="{{ path('app_admin_category_index') }}">Gestion des Catégories</a>
+        </nav>
+    {% endif %}
+    <nav class="navbar navbar-exepend-lg navbar-dark bg-warning mb-3">
+        <a href="#" class="navbar-brand">Pas à pas</a>
+        <div class="d-flex flex-row bd-highlight">
+            {% if app.user is not null %}
+                <a href="{{ path('app_index_logout') }}" class="nav-link text-white">Déconnexion</a>
+            {% else %}
+                <a href="{{ path('app_index_login') }}" class="nav-link text-white">Connexion</a>
+            {% endif %}
+            {{ render(controller('App\\Controller\\CategoryController::menu')) }}
+        </div>
+    </nav>
         <div class="container">
             {# affichage des messages flash #}
             {% for type, messages in app.session.flashBag.all %}
@@ -20,9 +38,11 @@
             {% block body %}{% endblock %}
         </div>
         {% block javascripts %}
+
             <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
         {% endblock %}
     </body>
 </html>

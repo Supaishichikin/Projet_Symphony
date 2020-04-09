@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CategoryController!{% endblock %}
+
+{% block body %}
+    <h1 style="color:saddlebrown;">Catégorie :</h1>
+    <strong class="mb-2 mt-2" style="font-size: 30px;">{{ category.name }}</strong>
+
+    {% if category.description is not null %}
+        <h4 style="color: saddlebrown;" class="mt-5">Description de la Catégorie :</h4>
+        <p class="mt-2">{{ category.description }}</p>
+    {% endif %}
+
+    <h4 style="color: saddlebrown;" class="mt-5">Challenge Associés à la catégorie </h4>
+    {% for achievement in achievements %}
+        <ul class="list-group mt-4">
+            <li class="list-group-item">
+                <a href="{{ path('app_admin_achievement_index') }}">
+                    <strong>{{ achievement.name }}</strong>
+                </a>
+            </li>
+        </ul>
+    {% endfor %}
+{% endblock %}

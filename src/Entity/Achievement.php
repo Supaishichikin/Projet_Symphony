@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AchievementRepository")
@@ -18,6 +19,7 @@ class Achievement
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="le titre est obligatoire")
      */
     private $name;
 
@@ -29,6 +31,7 @@ class Achievement
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="achievements")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="La catégorie est obligatoire")
      */
     private $category;
 

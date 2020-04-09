@@ -17,3 +17,6 @@
 
 # PHPStorm
 /.idea/
+/.php-version/
+/composer.lock/
+/symfony.lock/

@@ -54,12 +54,15 @@ CategoryController extends AbstractController
 
         if($form->isSubmitted()){
             if($form->isValid()){
+
                 $manager->persist($category);
+
                 $manager->flush();
 
                 $this->addFlash('success', 'La catégories est enregistrée');
 
                 return $this->redirectToRoute('app_admin_category_index');
+
             } else {
                 $this->addFlash('error', 'Le formulaire contient des erreurs' );
             }
@@ -79,7 +82,9 @@ CategoryController extends AbstractController
      */
     public function delete(EntityManagerInterface $manager, Category $category)
     {
+
         $manager->remove($category);
+
         $manager->flush();
 
         $this->addFlash('success', "La catégorie à été supprimé" );

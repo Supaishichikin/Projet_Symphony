@@ -142,7 +142,7 @@ class User implements UserInterface
     public function getUsername()
     {
         // On utilise pour l'instant que le pseudo comme identifiant, peut-être aussi l'email plus tard
-        return $this->email;
+        return $this->pseudo;
     }
 
     /**

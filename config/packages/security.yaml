@@ -23,6 +23,7 @@ security:
             form_login:
                 login_path: app_index_index
                 check_path: app_index_login
+                failure_path: app_index_login
 
             logout:
                 path: app_index_logout

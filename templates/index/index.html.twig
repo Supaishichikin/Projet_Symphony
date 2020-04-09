@@ -4,10 +4,8 @@
 
 {% block body %}
     <h1>Work in progress, ma gueule</h1>
-
-    <div class="row">
-
-            {% if app.user is null %}
+        {% if app.user is null %}
+            <div class="row">
                 <div class="col-6">
                     <h2>Inscription</h2>
                     {{ form_start(form) }}
@@ -33,13 +31,20 @@
                         </button>
                     </form>
                 </div>
-            {% else %}
-                <h3>AH mais sapristi te voilà sacrément connecté.e, <span style="color: red;">{{ app.user.pseudo }}</span></h3>
-                <a class="ml-2 btn btn-warning" href="{{ path('app_index_logout') }}">
-                    Se déconnecter
-                </a>
-            {% endif %}
+            </div>
+        {% else %}
+            <h3>AH mais sapristi te voilà sacrément connecté.e, <span style="color: red;">{{ app.user.pseudo }}</span></h3>
+            <a class="ml-2 btn btn-info" href="">
+                Mon profil
+            </a>
+            <a class="ml-2 btn btn-warning" href="{{ path('app_index_logout') }}">
+                Se déconnecter
+            </a>
+            <a class="ml-2 btn btn-secondary" href="{{ path('app_settings_index') }}">
+                Paramètres
+            </a>
+        {% endif %}
 
-    </div>
+
 
 {% endblock %}

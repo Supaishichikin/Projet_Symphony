@@ -47,8 +47,6 @@ class IndexController extends AbstractController
             }
         }
 
-
-
         return $this->render('index/index.html.twig',
             [
                 'form' => $form->createView(),
@@ -59,7 +57,7 @@ class IndexController extends AbstractController
     /**
      * @Route("/login")
      */
-    public function login(Request $request, AuthenticationUtils $authenticationUtils)
+    public function login(AuthenticationUtils $authenticationUtils)
     {
         /*
          * Connexion
@@ -67,8 +65,6 @@ class IndexController extends AbstractController
 
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
-        $form->handleRequest($request);
-
 //         Fait la connexion ET récupère une potentielle erreur
         $error = $authenticationUtils->getLastAuthenticationError();
 

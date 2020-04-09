@@ -41,7 +41,7 @@ class User implements UserInterface
 
     /**
      * @var string|null
-     * @Assert\NotBlank(message="Le mot de passe est obligatoire")
+     * @Assert\NotBlank(message="Le mot de passe est obligatoire", groups={"registration"})
      * @Assert\Regex("/^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z]).{8,20}/", message="Le mot de passe n'est pas conforme")
      */
     private $plainPassword;

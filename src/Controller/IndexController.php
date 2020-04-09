@@ -24,7 +24,7 @@ class IndexController extends AbstractController
          * Inscription
          */
         $user = new User();
-        $form = $this->createForm(RegistrationType::class, $user);
+        $form = $this->createForm(RegistrationType::class, $user, ["validation_groups" => ["Default", "Registration"]]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\AchievementRepository;
+use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,14 +15,14 @@ class AchievementController extends AbstractController
     /**
      * @Route("/")
      */
-    public function index(AchievementRepository $repository)
+    public function index(CategoryRepository $repository)
     {
-        $achievements= $repository->findBy([], ['id' => 'ASC']);
+        $categories = $repository->findBy([], ['id' => 'ASC']);
 
         return $this->render(
             'achievement/index.html.twig',
             [
-                'achievements' => $achievements
+                'categories' => $categories
             ]
         );
     }

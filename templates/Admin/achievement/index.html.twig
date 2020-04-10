@@ -7,13 +7,15 @@
         <h1>Gestion Activitées</h1>
         <a href="{{ path('app_admin_achievement_edit') }}" class="btn btn-outline-primary">Ajouter un Challenge</a>
         <table class="table table-striped mt-2">
-            <tr class="table-dark">
-                <th>id</th>
-                <th>id catégorie</th>
-                <th>name</th>
-                <th>description</th>
-                <th>Modification</th>
-            </tr>
+            <thead class="thead-dark">
+                <tr class="table-dark">
+                    <th>id</th>
+                    <th>id catégorie</th>
+                    <th>name</th>
+                    <th>description</th>
+                    <th>Modification</th>
+                </tr>
+            </thead>
             {% for achievement in achievements %}
                 <tr>
                     <td>{{ achievement.id }}</td>

@@ -9,12 +9,14 @@
             Créer une catégorie
         </a>
         <table class="table table-striped mt-2">
-            <tr class="table-dark">
-                <th>id</th>
-                <th>name</th>
-                <th>description</th>
-                <th>Modification</th>
-            </tr>
+            <thead class="thead-dark">
+                <tr class="table-dark ">
+                    <th>id</th>
+                    <th>name</th>
+                    <th>description</th>
+                    <th>Modification</th>
+                </tr>
+            </thead>
             {% for category in categories %}
             <tr>
                 <td>{{ category.id }}</td>

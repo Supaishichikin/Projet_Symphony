@@ -19,6 +19,7 @@
         <a href="{{ path('app_achievement_index') }}" class="navbar-brand">Pas à pas</a>
         <div class="d-flex flex-row bd-highlight">
             {% if app.user is not null %}
+                <a href="{{ path('app_settings_index') }}" class="nav-link text-white">Paramètre</a>
                 <a href="{{ path('app_index_logout') }}" class="nav-link text-white">Déconnexion</a>
             {% else %}
                 <a href="{{ path('app_index_login') }}" class="nav-link text-white">Connexion</a>

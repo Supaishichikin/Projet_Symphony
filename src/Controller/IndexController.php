@@ -82,7 +82,7 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/deconnexion")
+     * @Route("/logout")
      */
     public function logout()
     {

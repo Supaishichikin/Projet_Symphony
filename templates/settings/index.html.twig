@@ -8,7 +8,7 @@
     <div class="card ">
         <div class="row">
             <div class="col-1">
-                Email
+                Pseudo
             </div>
             <div class="col-3">
                 <span class="currentField">{{ user.username }}</span>
@@ -44,6 +44,33 @@
             </div>
         </div>
     </div>
+
+    <div class="card mt-5">
+        <div class="row">
+            <div class="col-1">
+                Mot de passe
+            </div>
+            <div class="col-3">
+                <span class="currentField">********************</span>
+                <div class="newField d-none">
+                    {{ form_start(passwordForm) }}
+                    <div class="form-group">
+                        <label class="required" for="currentPassword">Mot de passe actuel</label>
+                        <input type="password" id="currentPassword" name="currentPassword"
+                               class="form-control" required="required">
+                    </div>
+                    {{ form_row(passwordForm.plainPassword) }}
+                    <button class="btn btn-success" type="submit">Enregistrer</button>
+                    {{ form_end(passwordForm) }}
+                </div>
+            </div>
+            <div class="col-2 offset-6">
+                <button class="editField">Modifier</button>
+            </div>
+        </div>
+    </div>
+
+    <a href="{{ path('app_settings_deleteaccount') }}" class="mt-5 btn btn-danger">Supprimer votre compte</a>
 
 {% endblock %}
 

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block title %}Supprimer votre compte - {{ parent() }}{% endblock %}
+{% block body %}
+    <p>
+        Attention, la suppression sera effectuée après la validation de ce formulaire et est complètement irréversible.
+    </p>
+    <form method="post" class="form">
+        <div class="form-group">
+            <label for="checkPassword">Mot de passe</label>
+            <input type="password" id="checkPassword" name="checkPassword" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-danger">Confirmer la suppression</button>
+    </form>
+    <a href="{{ path('app_settings_index') }}" class="btn btn-secondary mt-5">Retour</a>
+{% endblock %}
+
+
+

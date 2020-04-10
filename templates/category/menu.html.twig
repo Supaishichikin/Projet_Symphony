@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             {% for category in categories %}
-                    <a class="nav-link" href="{{ path('app_category_index', {'id': category.id}) }}">
+                    <a class="nav-link" href="{{ path('app_category_index' , {'id': category.id}) }}">
                         {{ category.name }}
                     </a>
             {% endfor %}

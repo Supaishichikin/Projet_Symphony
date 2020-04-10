@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('app_category_index', {'id' : achievement.category.id}) }}" class="btn btn-outline-primary">
+        Retour vers <strong>{{ achievement.category.name }}</strong>
+    </a>
+    <br><br>
+    <h1>{{ achievement.name }}</h1>
+    <br><br>
+    <h3>Description du défi</h3>
+    <br>
+    <img src="http://via.placeholder.com/300x250" alt="image de description" class="">
+    <br><br>
+    <p>{{ achievement.description }}</p>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

@@ -15,7 +15,7 @@
     {% for achievement in achievements %}
         <ul class="list-group mt-4">
             <li class="list-group-item">
-                <a href="{{ path('app_admin_achievement_index') }}">
+                <a href="{{ path('app_achievement_detail', {'id': achievement.id} ) }}">
                     <strong>{{ achievement.name }}</strong>
                 </a>
             </li>

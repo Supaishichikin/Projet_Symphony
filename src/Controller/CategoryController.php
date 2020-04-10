@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class CategoryController
  * @package App\Controller
  *
- * @Route("/category")
+ * @Route("/access/category")
  */
 class CategoryController extends AbstractController
 {

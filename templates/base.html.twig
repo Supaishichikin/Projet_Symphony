@@ -16,7 +16,7 @@
         </nav>
     {% endif %}
     <nav class="navbar navbar-exepend-lg navbar-dark bg-warning mb-3">
-        <a href="#" class="navbar-brand">Pas à pas</a>
+        <a href="{{ path('app_achievement_index') }}" class="navbar-brand">Pas à pas</a>
         <div class="d-flex flex-row bd-highlight">
             {% if app.user is not null %}
                 <a href="{{ path('app_index_logout') }}" class="nav-link text-white">Déconnexion</a>

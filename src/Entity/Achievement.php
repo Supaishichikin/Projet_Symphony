@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -34,6 +36,16 @@ class Achievement
      * @Assert\NotBlank(message="La catégorie est obligatoire")
      */
     private $category;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserAchievement", mappedBy="achievement", orphanRemoval=true)
+     */
+    private $userAchievements;
+
+    public function __construct()
+    {
+        $this->userAchievements = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -72,6 +84,37 @@ class Achievement
     public function setCategory(?category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserAchievement[]
+     */
+    public function getUserAchievements(): Collection
+    {
+        return $this->userAchievements;
+    }
+
+    public function addUserAchievement(UserAchievement $userAchievement): self
+    {
+        if (!$this->userAchievements->contains($userAchievement)) {
+            $this->userAchievements[] = $userAchievement;
+            $userAchievement->setAchievement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserAchievement(UserAchievement $userAchievement): self
+    {
+        if ($this->userAchievements->contains($userAchievement)) {
+            $this->userAchievements->removeElement($userAchievement);
+            // set the owning side to null (unless already changed)
+            if ($userAchievement->getAchievement() === $this) {
+                $userAchievement->setAchievement(null);
+            }
+        }
 
         return $this;
     }

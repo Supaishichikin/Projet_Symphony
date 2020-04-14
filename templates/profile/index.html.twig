@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ app.user ~ ' - ' ~ parent() }}{% endblock %}
+
+{% block body %}
+    <h1>En cours</h1>
+    <div class="row">
+        {% for achievement in in_progress %}
+            {{ render(controller('App\\Controller\\AchievementController::card', {'achievement' : achievement})) }}
+        {% endfor %}
+    </div>
+    <h1>Complétées</h1>
+    <div class="row">
+        {% for achievement in completed %}
+            {{ render(controller('App\\Controller\\AchievementController::card', {'achievement' : achievement})) }}
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -2,9 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Achievement;
+use App\Entity\User;
+use App\Entity\UserAchievement;
 use App\Repository\AchievementRepository;
 use App\Repository\CategoryRepository;
 use Knp\Component\Pager\PaginatorInterface;
+use App\Repository\UserAchievementRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,7 +22,10 @@ class AchievementController extends AbstractController
     /**
      * @Route("/")
      */
-    public function index(CategoryRepository $repository, AchievementRepository $repository2, PaginatorInterface $paginator, Request $request)
+    public function index(CategoryRepository $repository,
+                          AchievementRepository $repository2,
+                          PaginatorInterface $paginator,
+                          Request $request)
     {
         $categories = $repository->findBy([], ['id' => 'ASC']);
 
@@ -39,18 +47,92 @@ class AchievementController extends AbstractController
         );
     }
 
+    public function card(UserAchievementRepository $linkRepository, Achievement $achievement)
+    {
+        $achievement->status = $this->getStatus($achievement, $this->getUser(), $linkRepository);
+
+        return $this->render('achievement/card.html.twig',
+            [
+                'achievement' => $achievement
+            ]);
+    }
+
     /**
-     * @Route("/detail/{id}")
+     * @Route("/detail/{id}", requirements={"id" : "\d+"})
      */
-    public function detail(AchievementRepository $repository, $id)
+    public function detail(AchievementRepository $repository,UserAchievementRepository $linkRepository, $id)
     {
         $achievement = $repository->findOneBy(['id' => $id]);
+
+        $status = $this->getStatus($achievement, $this->getUser(), $linkRepository);
 
         return $this->render(
             'achievement/detail.html.twig',
             [
-                'achievement' => $achievement
+                'achievement' => $achievement,
+                'status' => $status
             ]
         );
+    }
+
+
+    private function getStatus(Achievement $achievement, User $user, UserAchievementRepository $linkRepository)
+    {
+        $link = $linkRepository->findOneBy(['user' => $user, 'achievement' => $achievement]);
+
+        $status = (object) ['message' => '', 'class' => ''];
+
+        if (is_null($link)) {
+            $status->message = "Commencer l'activité";
+            $status->class = "btn-info";
+        } else {
+            if(is_null($link->getEndDate())){
+                $status->message = "Terminer l'activité";
+                $status->class = "btn-success";
+            } else {
+                $status->message = "Recommencer l'activité";
+                $status->class = "btn-warning";
+            }
+        }
+
+        return $status;
+    }
+
+    /**
+     * @Route("/process/{id}", requirements={"id" : "\d+"})
+     */
+    public function processAchievement(Achievement $achievement,
+                                       UserAchievementRepository $linkRepository,
+                                       EntityManagerInterface $manager)
+    {
+        if(is_null($achievement)){
+            $this->addFlash('error', "Cette activité n'a pas été trouvée");
+            return $this->redirectToRoute('app_achievement_index');
+        }
+
+        $user = $this->getUser();
+        $link = $linkRepository->findOneBy(['user' => $user, 'achievement' => $achievement]);
+
+        if (is_null($link)) {
+            $newlink = new UserAchievement();
+            $newlink->setUser($user);
+            $newlink->setAchievement($achievement);
+            $newlink->setStartDate(new \DateTime());
+            $newlink->setEndDate(null);
+
+            $manager->persist($newlink);
+        } else {
+            if(is_null($link->getEndDate())){
+                $link->setEndDate(new \DateTime());
+            } else {
+                $link->setStartDate(new \DateTime());
+                $link->setEndDate(null);
+            }
+            $manager->persist($link);
+        }
+
+        $manager->flush();
+
+        return $this->redirectToRoute('app_achievement_index');
     }
 }

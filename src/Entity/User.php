@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -51,6 +53,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=20)
      */
     private $role = 'ROLE_USER';
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserAchievement", mappedBy="user", orphanRemoval=true)
+     */
+    private $userAchievements;
+
+    public function __construct()
+    {
+        $this->userAchievements = new ArrayCollection();
+    }
 
     public function __toString(): ?string
     {
@@ -152,5 +164,36 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // Aucune donnée sensible à effacer pour le moment
+    }
+
+    /**
+     * @return Collection|UserAchievement[]
+     */
+    public function getUserAchievements(): Collection
+    {
+        return $this->userAchievements;
+    }
+
+    public function addUserAchievement(UserAchievement $userAchievement): self
+    {
+        if (!$this->userAchievements->contains($userAchievement)) {
+            $this->userAchievements[] = $userAchievement;
+            $userAchievement->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserAchievement(UserAchievement $userAchievement): self
+    {
+        if ($this->userAchievements->contains($userAchievement)) {
+            $this->userAchievements->removeElement($userAchievement);
+            // set the owning side to null (unless already changed)
+            if ($userAchievement->getUser() === $this) {
+                $userAchievement->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

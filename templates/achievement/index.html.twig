@@ -26,17 +26,7 @@
         <div class="container">
             <div class="row">
                 {% for achievement in achievements %}
-                    <div class="col-4 text-center d-flex justify-content-center mb-3">
-                        <div class="card p-2 border rounded mb-3" style="width: 18rem;">
-                            <img src="http://via.placeholder.com/200x150" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ achievement.name }}</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                                    aliquid asperiores at corporis ducimus ipsum placeat quam, quisquam rem, sit sunt totam.</p>
-                                <a href="{{ path('app_achievement_detail', {'id': achievement.id}) }}" class="btn btn-primary">Voir détail</a>
-                            </div>
-                        </div>
-                    </div>
+                    {{ render(controller('App\\Controller\\AchievementController::card', {'achievement' : achievement})) }}
                 {% endfor %}
                 <div class="col-12 d-flex justify-content-center">
                     <span class="">{{ knp_pagination_render(achievements) }}</span>

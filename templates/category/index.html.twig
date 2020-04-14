@@ -12,13 +12,9 @@
     {% endif %}
 
     <h4 style="color: saddlebrown;" class="mt-5">Challenge Associés à la catégorie </h4>
-    {% for achievement in achievements %}
-        <ul class="list-group mt-4">
-            <li class="list-group-item">
-                <a href="{{ path('app_achievement_detail', {'id': achievement.id} ) }}">
-                    <strong>{{ achievement.name }}</strong>
-                </a>
-            </li>
-        </ul>
-    {% endfor %}
+    <div class="row">
+        {% for achievement in achievements %}
+            {{ render(controller('App\\Controller\\AchievementController::card', {'achievement' : achievement})) }}
+        {% endfor %}
+    </div>
 {% endblock %}

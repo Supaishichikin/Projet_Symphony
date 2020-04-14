@@ -6,36 +6,43 @@
     <h1>Relève le défi</h1>
     <br>
     <br>
-
-    <h2 style="font-size: 1.4em">
-        Rentabilise ton temps durant le confinement
-    </h2>
-    <p style="font-size: small" class="mt-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur doloribus est excepturi nam natus porro
-        possimus quas voluptas. Harum, perspiciatis voluptatem. Aperiam autem dolorum ea eligendi esse est excepturi
-        expedita id magni nemo, nesciunt non nostrum officiis pariatur quo rerum sunt? Distinctio earum incidunt
-        laudantium molestias optio placeat, quam unde?<br><br>
-        Découvrez nos différents défi à partir de leur catégorie : <br><br>
-        {% for category in categories %}
-            <a href="{{ path('app_category_index', {'id': category.id}) }}" class="btn btn-outline-primary">
-                {{ category.name }}
-            </a>
-        {% endfor %}
-    </p>
-    <br>
-    <h2 style="font-size: 1.4em" class="mb-5">Quelques exemple d'achievements que tu peux découvrir :</h2>
-    <div class="row">
-        {% for achievement in achievements %}
-            <div class="col-3 text-center d-flex justify-content-center">
-                <div class="card mb-3" style="width: 18rem;">
-                    <img src="http://via.placeholder.com/200x150" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ achievement.name }}</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
-                            aliquid asperiores at corporis ducimus ipsum placeat quam, quisquam rem, sit sunt totam.</p>
-                        <a href="{{ path('app_achievement_detail', {'id': achievement.id}) }}" class="btn btn-primary">Voir détail</a>
+    <div class="container">
+        <h2 style="font-size: 1.4em">
+            Rentabilise ton temps durant le confinement
+        </h2>
+        <p style="font-size: small" class="mt-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur doloribus est excepturi nam natus porro
+            possimus quas voluptas. Harum, perspiciatis voluptatem. Aperiam autem dolorum ea eligendi esse est excepturi
+            expedita id magni nemo, nesciunt non nostrum officiis pariatur quo rerum sunt? Distinctio earum incidunt
+            laudantium molestias optio placeat, quam unde?<br><br>
+            Découvrez nos différents défi à partir de leur catégorie : <br><br>
+            {% for category in categories %}
+                <a href="{{ path('app_category_index', {'id': category.id}) }}" class="btn btn-outline-primary">
+                    {{ category.name }}
+                </a>
+            {% endfor %}
+        </p>
+        <br>
+        <h2 style="font-size: 1.4em" class="mb-5">Quelques exemples de défi que tu peux relevé :</h2>
+        <div class="container">
+            <div class="row">
+                {% for achievement in achievements %}
+                    <div class="col-4 text-center d-flex justify-content-center mb-3">
+                        <div class="card p-2 border rounded mb-3" style="width: 18rem;">
+                            <img src="http://via.placeholder.com/200x150" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ achievement.name }}</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus,
+                                    aliquid asperiores at corporis ducimus ipsum placeat quam, quisquam rem, sit sunt totam.</p>
+                                <a href="{{ path('app_achievement_detail', {'id': achievement.id}) }}" class="btn btn-primary">Voir détail</a>
+                            </div>
+                        </div>
                     </div>
+                {% endfor %}
+                <div class="col-12 d-flex justify-content-center">
+                    <span class="">{{ knp_pagination_render(achievements) }}</span>
                 </div>
+
             </div>
-        {% endfor %}
+        </div>
     </div>
 {% endblock %}

@@ -10,6 +10,8 @@
                     <h2>Inscription</h2>
                     {{ form_start(form) }}
                     {{ form_row(form.pseudo) }}
+                    <a href="{{ path('app_index_isusernameavailable', {'pseudo': "user"}) }}" id="is-available">Vérifier la disponibilité</a>
+                    <span id="availability"></span>
                     {{ form_row(form.email) }}
                     {{ form_row(form.plainPassword) }}
                     <button class="btn btn-success" type="submit">S'inscrire</button>
@@ -26,7 +28,8 @@
                             <label for="connexion_password">Mot de passe</label>
                             <input id="connexion_password" type="password" name="_password" class="form-control">
                         </div>
-                        <button type="submit" class="btn btn-success">
+                        <a href="{{ path('app_index_forgottenpassword') }}">Mot de passe oublié</a><br>
+                        <button type="submit" class="mt-2 btn btn-success">
                             Se connecter
                         </button>
                     </form>
@@ -50,7 +53,10 @@
                 </a>
             </div>
         {% endif %}
-
-
-
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('javascript/usernameAvailability.js') }}"></script>
+{% endblock %}
+

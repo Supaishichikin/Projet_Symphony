@@ -19,9 +19,7 @@ class EditPasswordType extends AbstractType
                     'type' => PasswordType::class,
                     'first_options' => [
                         'label' => 'Nouveau mot de passe',
-                        'help' => 'Le mot de passe doit faire entre 8 et 20 caractères. Il doit contenir au moins deux
-                        majuscules, deux minuscules, deux chiffres, et un caractère spécial parmi les suivants : 
-                        !, @, #, , &, *'
+                        'help' => 'Le mot de passe doit faire entre 8 et 20 caractères.'
                     ],
                     'second_options' => [
                         'label' => 'Confirmation du nouveau mot de passe'

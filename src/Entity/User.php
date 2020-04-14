@@ -27,7 +27,7 @@ class User implements UserInterface
     private $pseudo;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, unique=true)
      * @Assert\NotBlank(message="L'adresse email est obligatoire")
      * @Assert\Email(message="L'adresse email n'est pas valide")
      * @Assert\Length(max="50", maxMessage="L'adresse email ne peut dépasser 50 caractères")
@@ -42,7 +42,8 @@ class User implements UserInterface
     /**
      * @var string|null
      * @Assert\NotBlank(message="Le mot de passe est obligatoire", groups={"registration"})
-     * @Assert\Regex("/^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z]).{8,20}/", message="Le mot de passe n'est pas conforme")
+     * @Assert\Length(min="8", minMessage="Le mot de passe doit faire au moins 8 caractères de long",
+     *                max="20", maxMessage="Le mot de passe ne doit pas déapsser 20 caractères")
      */
     private $plainPassword;
 

@@ -4,9 +4,14 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use RandomLib\Factory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -18,7 +23,8 @@ class IndexController extends AbstractController
      */
     public function index(Request $request,
                           UserPasswordEncoderInterface $passwordEncoder,
-                          EntityManagerInterface $manager)
+                          EntityManagerInterface $manager,
+                          UserRepository $repository)
     {
         /*
          * Inscription
@@ -29,19 +35,32 @@ class IndexController extends AbstractController
 
         if ($form->isSubmitted()) {
             if($form->isValid()) {
-                $encodedPassword = $passwordEncoder->encodePassword(
-                    $user,
-                    $user->getPlainPassword()
-                );
+                $error = false;
+                if ($repository->findOneBy(['email' => $user->getEmail()])) {
+                    $this->addFlash('error', 'Cette adresse email est déjà utilisée');
+                    $error = true;
+                }
 
-                $user->setPassword($encodedPassword);
+                if($repository->findOneBy(['pseudo' => $user->getPseudo()])) {
+                    $this->addFlash('error', 'Ce pseudo est déjà utilisé');
+                    $error = true;
+                }
 
-                $manager->persist($user);
-                $manager->flush();
+                if(!$error) {
+                    $encodedPassword = $passwordEncoder->encodePassword(
+                        $user,
+                        $user->getPlainPassword()
+                    );
 
-                $this->addFlash('success', 'Votre compte a bien été créé');
+                    $user->setPassword($encodedPassword);
 
-                return $this->redirectToRoute('app_index_index');
+                    $manager->persist($user);
+                    $manager->flush();
+
+                    $this->addFlash('success', 'Votre compte a bien été créé');
+
+                    return $this->redirectToRoute('app_index_index');
+                }
             } else {
                 $this->addFlash('error', 'Le formulaire contient des erreurs');
             }
@@ -52,6 +71,18 @@ class IndexController extends AbstractController
                 'form' => $form->createView(),
                 'last_username' => ''
             ]);
+    }
+
+    /**
+     * @Route("/available/{pseudo}")
+     */
+    public function isUsernameAvailable(UserRepository $repository, string $pseudo) {
+        if(is_null($repository->findOneBy(['pseudo' => $pseudo]))) {
+            return new Response("Pseudo disponible");
+        } else {
+            return new Response("Pseudo déjà utilisé");
+        }
+
     }
 
     /**
@@ -87,5 +118,65 @@ class IndexController extends AbstractController
     public function logout()
     {
 
+    }
+
+    /**
+     * @Route("/forgotten_password")
+     */
+    public function forgottenPassword(Request $request,
+                                      MailerInterface $mailer,
+                                      UserRepository $repository,
+                                      UserPasswordEncoderInterface $passwordEncoder,
+                                      EntityManagerInterface $manager)
+    {
+        if ($request->request->has('emailForReset')) {
+            $emailForReset = $request->request->get('emailForReset');
+            $user = $repository->findOneBy(['email' => $emailForReset]);
+
+            if(!is_null($user)) {
+                $newPassword = $this->generateTemporaryPassword();
+
+                $newEncodedPassword = $passwordEncoder->encodePassword(
+                    $user,
+                    $newPassword
+                );
+
+                $user->setPassword($newEncodedPassword);
+                $manager->persist($user);
+                $manager->flush();
+
+                $mail = new Email();
+
+                $mailBody = $this->renderView('index/resetPassword_body.html.twig',
+                    [
+                        'password' => $newPassword
+                    ]);
+
+                $mail
+                    ->subject('Mot de passe temporaire')
+                    ->from('daviet.charles@gmail.com')
+                    ->to($emailForReset)
+                    ->replyTo($emailForReset)
+                    ->html($mailBody);
+
+                $mailer->send($mail);
+
+                return $this->redirectToRoute('app_index_index');
+            } else {
+                $this->addFlash('error', "L'adresse email fournie n'est associé à aucun compte");
+            }
+
+
+        }
+
+        return $this->render('index/forgottenPassword.html.twig');
+    }
+
+    private function generateTemporaryPassword()
+    {
+        $factory = new Factory();
+        $generator = $factory->getMediumStrengthGenerator();
+        $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ#?!&-_+";
+        return $generator->generateString(20, $characters);
     }
 }

@@ -10,10 +10,11 @@
         <h2 style="font-size: 1.4em">
             Rentabilise ton temps durant le confinement
         </h2>
-        <p style="font-size: small" class="mt-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur doloribus est excepturi nam natus porro
-            possimus quas voluptas. Harum, perspiciatis voluptatem. Aperiam autem dolorum ea eligendi esse est excepturi
-            expedita id magni nemo, nesciunt non nostrum officiis pariatur quo rerum sunt? Distinctio earum incidunt
-            laudantium molestias optio placeat, quam unde?<br><br>
+        <p style="font-size: small" class="mt-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Consequatur doloribus est excepturi nam natus porro possimus quas voluptas. Harum, perspiciatis voluptatem.
+            Aperiam autem dolorum ea eligendi esse est excepturi expedita id magni nemo,
+            nesciunt non nostrum officiis pariatur quo rerum sunt? Distinctio earum incidunt laudantium molestias optio
+            placeat, quam unde?<br><br>
             Découvrez nos différents défi à partir de leur catégorie : <br><br>
             {% for category in categories %}
                 <a href="{{ path('app_category_index', {'id': category.id}) }}" class="btn btn-outline-primary">
@@ -29,7 +30,9 @@
                     {{ render(controller('App\\Controller\\AchievementController::card', {'achievement' : achievement})) }}
                 {% endfor %}
                 <div class="col-12 d-flex justify-content-center">
-                    <span class="">{{ knp_pagination_render(achievements) }}</span>
+                    <span>
+                        {{ knp_pagination_render(achievements,'@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
+                    </span>
                 </div>
 
             </div>

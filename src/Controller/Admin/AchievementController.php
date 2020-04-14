@@ -6,6 +6,7 @@ use App\Entity\Achievement;
 use App\Form\AchievementType;
 use App\Repository\AchievementRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -26,10 +27,12 @@ class AchievementController extends AbstractController
     {
         $achievements = $repository->findBy([], ['id' => 'ASC']);
 
+
         return $this->render(
         'Admin/achievement/index.html.twig',
             [
                 'achievements' => $achievements
+
             ]
         );
     }
@@ -37,8 +40,19 @@ class AchievementController extends AbstractController
     /**
      *  @Route("/edit/{id}", defaults={"id": null}, requirements={"id": "\d+"})
      */
-    public function edit(Request $request, EntityManagerInterface $manager, $id)
+    public function edit(Request $request, EntityManagerInterface $manager,AchievementRepository $repository,
+                         PaginatorInterface $paginator, $id)
     {
+
+        $donnees = $repository->findBy([], ['id' => 'ASC']);
+        $achievements = $paginator->paginate(
+            $donnees,
+            $request->query->getInt(
+                'page', 1),
+            3
+        );
+
+        $currentUser = $this->getUser();
 
         if(is_null($id)) { // création
             $achievement = new Achievement();
@@ -70,7 +84,9 @@ class AchievementController extends AbstractController
         return $this->render(
             'Admin/achievement/edit.html.twig',
             [
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'achievements' => $achievements,
+                'user' => $currentUser
             ]
         );
     }

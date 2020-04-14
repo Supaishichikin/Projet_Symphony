@@ -6,6 +6,12 @@ use App\Repository\UserAchievementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class ProfileController
+ * @package App\Controller
+ *
+ * @Route("/access")
+ */
 class ProfileController extends AbstractController
 {
     /**

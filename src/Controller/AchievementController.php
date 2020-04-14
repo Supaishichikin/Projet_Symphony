@@ -29,10 +29,10 @@ class AchievementController extends AbstractController
     {
         $categories = $repository->findBy([], ['id' => 'ASC']);
 
-        $donnes = $repository2->findBy([],['id' => 'ASC']);
+        $donnees = $repository2->findBy([],['id' => 'ASC']);
 
         $achievements = $paginator->paginate(
-            $donnes,
+            $donnees,
             $request->query->getInt(
                 'page', 1),
             6

@@ -9,22 +9,24 @@
     </head>
     <body>
     {% if is_granted('ROLE_ADMIN') %}
-        <nav class="navbar navbar-exepend-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-link text-white" href="{{ path('app_admin_achievement_index') }}">Admin</a>
             <a class="nav-link text-white" href="{{ path('app_admin_achievement_index') }}">Gestion des Activités</a>
             <a class="nav-link text-white" href="{{ path('app_admin_category_index') }}">Gestion des Catégories</a>
         </nav>
     {% endif %}
-    <nav class="navbar navbar-exepend-lg navbar-dark bg-warning mb-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-warning mb-3">
         <a href="{{ path('app_achievement_index') }}" class="navbar-brand">Pas à pas</a>
-        <div class="d-flex flex-row bd-highlight">
+        <div class="d-flex justify-content-start">
+     {##}       {{ render(controller('App\\Controller\\CategoryController::menu')) }}
+        </div>
+        <div class="d-flex justify-content-end">
             {% if app.user is not null %}
-                <a href="{{ path('app_settings_index') }}" class="nav-link text-white">Paramètre</a>
-                <a href="{{ path('app_index_logout') }}" class="nav-link text-white">Déconnexion</a>
+                <a href="{{ path('app_settings_index') }}" class="nav-link text-white text-right">Paramètre</a>
+                <a href="{{ path('app_index_logout') }}" class="nav-link text-white  text-right">Déconnexion</a>
             {% else %}
-                <a href="{{ path('app_index_login') }}" class="nav-link text-white">Connexion</a>
+                <a href="{{ path('app_index_login') }}" class="nav-link text-white text-right">Connexion</a>
             {% endif %}
-            {{ render(controller('App\\Controller\\CategoryController::menu')) }}
         </div>
     </nav>
         <div class="container">

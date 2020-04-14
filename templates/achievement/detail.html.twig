@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a href="{{ path('app_category_index', {'id' : achievement.category.id}) }}" class="btn btn-outline-primary">
-        Retour vers <strong>{{ achievement.category.name }}</strong>
+    <a href="{{ path('app_achievement_index') }}" class="btn btn-outline-primary">
+        Retour vers l'accueil
     </a>
     <br><br>
     <h1>{{ achievement.name }}</h1>

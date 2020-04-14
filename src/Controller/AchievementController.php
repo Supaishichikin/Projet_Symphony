@@ -15,14 +15,17 @@ class AchievementController extends AbstractController
     /**
      * @Route("/")
      */
-    public function index(CategoryRepository $repository)
+    public function index(CategoryRepository $repository, AchievementRepository $repository2)
     {
         $categories = $repository->findBy([], ['id' => 'ASC']);
+
+        $achievements = $repository2->findBy([],['id' => 'ASC']);
 
         return $this->render(
             'achievement/index.html.twig',
             [
-                'categories' => $categories
+                'categories' => $categories,
+                'achievements' => $achievements
             ]
         );
     }

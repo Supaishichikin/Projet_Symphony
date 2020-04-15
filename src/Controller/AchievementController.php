@@ -69,14 +69,22 @@ class AchievementController extends AbstractController
     public function detail(AchievementRepository $repository,UserAchievementRepository $linkRepository, $id)
     {
         $achievement = $repository->findOneBy(['id' => $id]);
+        $user = $this->getUser();
 
-        $status = $this->getStatus($achievement, $this->getUser(), $linkRepository);
+        $status = $this->getStatus($achievement, $user, $linkRepository);
+        if ($status->code == 0) {
+            $timesCompleted = 0;
+        } else {
+            $timesCompleted = ($linkRepository->findOneBy(['user' => $user, 'achievement' => $achievement]))
+                ->getTimescompleted();
+        }
 
         return $this->render(
             'achievement/detail.html.twig',
             [
                 'achievement' => $achievement,
-                'status' => $status
+                'status' => $status,
+                'times_completed' => $timesCompleted
             ]
         );
     }
@@ -86,7 +94,7 @@ class AchievementController extends AbstractController
     {
         $link = $linkRepository->findOneBy(['user' => $user, 'achievement' => $achievement]);
 
-        $status = (object) ['message' => '', 'class' => ''];
+        $status = (object) ['code' => 0,'message' => '', 'class' => ''];
 
         if (is_null($link)) {
             $status->message = "Commencer l'activité";
@@ -95,9 +103,11 @@ class AchievementController extends AbstractController
             if(is_null($link->getEndDate())){
                 $status->message = "Terminer l'activité";
                 $status->class = "btn-success";
+                $status->code = 1;
             } else {
                 $status->message = "Recommencer l'activité";
                 $status->class = "btn-warning";
+                $status->code = 2;
             }
         }
 
@@ -129,7 +139,7 @@ class AchievementController extends AbstractController
             $manager->persist($newlink);
         } else {
             if(is_null($link->getEndDate())){
-                $link->setEndDate(new \DateTime());
+                $link->completeAchievement();
             } else {
                 $link->setStartDate(new \DateTime());
                 $link->setEndDate(null);

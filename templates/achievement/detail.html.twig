@@ -15,6 +15,7 @@
     <a href="{{ path('app_achievement_processachievement', {"id" : achievement.id}) }}" class="btn {{ status.class }}">
         {{ status.message }}
     </a>
+    <p>Cette activité à été complétée {{ times_completed }} fois</p>
 {% endblock %}
 
 {% block title %}

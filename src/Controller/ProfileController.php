@@ -10,12 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class ProfileController
  * @package App\Controller
  *
- * @Route("/access")
+ * @Route("/access/profile")
  */
 class ProfileController extends AbstractController
 {
     /**
-     * @Route("/profile", name="profile")
+     * @Route("/")
      */
     public function index(UserAchievementRepository $repository)
     {

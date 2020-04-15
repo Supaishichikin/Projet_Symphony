@@ -40,7 +40,8 @@ class AchievementController extends AbstractController
     /**
      *  @Route("/edit/{id}", defaults={"id": null}, requirements={"id": "\d+"})
      */
-    public function edit(Request $request, EntityManagerInterface $manager,AchievementRepository $repository,
+    public function
+    edit(Request $request, EntityManagerInterface $manager,AchievementRepository $repository,
                          PaginatorInterface $paginator, $id)
     {
 

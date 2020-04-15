@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}Erreur - {{ parent() }}{% endblock %}
+{% block body %}
+    <h1>Toutes nos excuses, une erreur est survenue</h1>
+    <p class="mt-5">
+        Une erreur inattendue est survenue. Vous pouvez
+        cliquer <a href="{{ path('app_achievement_index') }}">ici</a> pour revenir à l'accueil.
+    </p>
+{% endblock %}

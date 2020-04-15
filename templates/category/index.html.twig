@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}CategoryController!{% endblock %}
+{% block title %}{{ category.name ~ ' - ' ~ parent() }}{% endblock %}
 
 {% block body %}
     <h1 style="color:saddlebrown;">Catégorie :</h1>
@@ -11,7 +11,7 @@
         <p class="mt-2">{{ category.description }}</p>
     {% endif %}
 
-    <h4 style="color: saddlebrown;" class="mt-5">Challenge Associés à la catégorie </h4>
+    <h4 style="color: saddlebrown;" class="mt-5">Activités associées à la catégorie </h4>
     <div class="row">
         {% for achievement in achievements %}
             {{ render(controller('App\\Controller\\AchievementController::card', {'achievement' : achievement})) }}

@@ -26,6 +26,10 @@ class IndexController extends AbstractController
                           EntityManagerInterface $manager,
                           UserRepository $repository)
     {
+        if(!is_null($this->getUser())){
+            return $this->redirectToRoute("app_achievement_index");
+        }
+
         /*
          * Inscription
          */
@@ -82,7 +86,6 @@ class IndexController extends AbstractController
         } else {
             return new Response("Pseudo déjà utilisé");
         }
-
     }
 
     /**
@@ -90,10 +93,6 @@ class IndexController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
-        /*
-         * Connexion
-         */
-
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
 //         Fait la connexion ET récupère une potentielle erreur
@@ -103,13 +102,14 @@ class IndexController extends AbstractController
 
         if(!empty($error)) {
             $this->addFlash('error', 'Identifiants incorrects');
+            return $this->render('index/index.html.twig',
+                [
+                    'form' => $form->createView(),
+                    'last_username' => $lastUsername
+                ]);
+        } else {
+            return $this->redirectToRoute("app_achievement_index");
         }
-
-        return $this->render('index/index.html.twig',
-            [
-                'form' => $form->createView(),
-                'last_username' => $lastUsername
-            ]);
     }
 
     /**

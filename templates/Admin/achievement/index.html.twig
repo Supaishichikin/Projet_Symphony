@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Admin AchievementController{% endblock %}
+{% block title %}Gestion articles - {{ parent() }}{% endblock %}
 
 {% block body %}
-<h1>Gestion Activitées</h1>
+<h1>Gestion Activités</h1>
 <a href="{{ path('app_admin_achievement_edit') }}" class="btn btn-outline-primary">Ajouter un Challenge</a>
 <table class="table table-striped mt-2">
     <thead class="thead-dark">

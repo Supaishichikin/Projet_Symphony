@@ -38,6 +38,11 @@ class UserAchievement
      */
     private $achievement;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $timescompleted = 0;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +92,26 @@ class UserAchievement
     public function setAchievement(?Achievement $achievement): self
     {
         $this->achievement = $achievement;
+
+        return $this;
+    }
+
+    public function getTimescompleted(): ?int
+    {
+        return $this->timescompleted;
+    }
+
+    public function setTimescompleted(int $timescompleted): self
+    {
+        $this->timescompleted = $timescompleted;
+
+        return $this;
+    }
+
+    public function completeAchievement(): self
+    {
+        $this->setEndDate(new \DateTime());
+        $this->timescompleted += 1;
 
         return $this;
     }

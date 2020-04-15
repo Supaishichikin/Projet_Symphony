@@ -1,15 +1,5 @@
-{% block title %}
-
-{% endblock %}
-
-{% block body %}
-
-
-    {% for category in categories %}
-            <a class="nav-link text-white d-flex justify-content-start" href="{{ path('app_category_index' , {'id': category.id}) }}">
-                {{ category.name }}
-            </a>
-    {% endfor %}
-
-
-{% endblock %}
+{% for category in categories %}
+    <a class="nav-link text-white d-flex justify-content-start" href="{{ path('app_category_index' , {'id': category.id}) }}">
+        {{ category.name }}
+    </a>
+{% endfor %}

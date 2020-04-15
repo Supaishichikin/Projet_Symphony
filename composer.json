@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ircmaxell/random-lib": "^1.2",
+        "knplabs/knp-paginator-bundle": "^5.1",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "4.4.*",
         "symfony/console": "4.4.*",
@@ -24,7 +25,7 @@
         "symfony/security-bundle": "4.4.*",
         "symfony/serializer-pack": "*",
         "symfony/translation": "4.4.*",
-        "symfony/twig-pack": "*",
+        "symfony/twig-pack": "^1.0",
         "symfony/validator": "4.4.*",
         "symfony/web-link": "4.4.*",
         "symfony/yaml": "4.4.*"

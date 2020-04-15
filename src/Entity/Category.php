@@ -41,7 +41,6 @@ class Category
      */
     private $color;
 
-
     public function __construct()
     {
         $this->achievements = new ArrayCollection();

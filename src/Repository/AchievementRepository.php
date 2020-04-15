@@ -19,6 +19,23 @@ class AchievementRepository extends ServiceEntityRepository
         parent::__construct($registry, Achievement::class);
     }
 
+    public function search(array $filters = [])
+    {
+        $builder = $this->createQueryBuilder('a');
+
+        $builder->orderBy('a.name', 'ASC');
+
+        if(!empty($filters['category'])){
+            $builder
+                ->andWhere('a.category = :category')
+                ->setParameter('category', $filters['category'])
+            ;
+        }
+
+        $query = $builder->getQuery();
+
+        return $query->getResult();
+    }
     // /**
     //  * @return Achievement[] Returns an array of Achievement objects
     //  */
@@ -47,4 +64,5 @@ class AchievementRepository extends ServiceEntityRepository
         ;
     }
     */
+
 }

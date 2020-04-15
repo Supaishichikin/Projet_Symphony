@@ -5,8 +5,9 @@ namespace App\Controller;
 use App\Entity\Achievement;
 use App\Entity\User;
 use App\Entity\UserAchievement;
+use App\Form\AchievementType;
+use App\Form\SearchAchievementsType;
 use App\Repository\AchievementRepository;
-use App\Repository\CategoryRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Repository\UserAchievementRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,33 +23,38 @@ class AchievementController extends AbstractController
     /**
      * @Route("/")
      */
-    public function index(CategoryRepository $repository,
-                          AchievementRepository $repository2,
+    public function index(AchievementRepository $repository,
                           PaginatorInterface $paginator,
                           Request $request)
     {
-        $categories = $repository->findBy([], ['id' => 'ASC']);
 
-        $donnees = $repository2->findBy([],['id' => 'ASC']);
+        $form = $this->createForm(SearchAchievementsType::class);
+        $form->handleRequest($request);
 
+        dump($request->query);
+
+        $donnees = $repository->search((array) $form->getData());
+        dump($donnees);
+        $limit = count($donnees);
+        dump($limit);
         $achievements = $paginator->paginate(
             $donnees,
             $request->query->getInt(
                 'page', 1),
             6
         );
-
         return $this->render(
             'achievement/index.html.twig',
             [
-                'categories' => $categories,
-                'achievements' => $achievements
+                'achievements' => $achievements,
+                'form' => $form->createView()
             ]
         );
     }
 
     public function card(UserAchievementRepository $linkRepository, Achievement $achievement)
     {
+
         $achievement->status = $this->getStatus($achievement, $this->getUser(), $linkRepository);
 
         return $this->render('achievement/card.html.twig',

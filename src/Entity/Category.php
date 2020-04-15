@@ -36,9 +36,21 @@ class Category
      */
     private $achievements;
 
+    /**
+     * @ORM\Column(type="string", length=7)
+     */
+    private $color;
+
+
     public function __construct()
     {
         $this->achievements = new ArrayCollection();
+
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
     public function getId(): ?int
@@ -97,6 +109,18 @@ class Category
                 $achievement->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(?string $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }

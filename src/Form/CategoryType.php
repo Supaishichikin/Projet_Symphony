@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,6 +28,12 @@ class CategoryType extends AbstractType
                     'label' => 'Description de la catégorie'
                 ]
             )
+            ->add('color',
+                    ColorType::class,
+                [
+                    'label' => 'Couleur'
+                ]
+                )
         ;
     }
 

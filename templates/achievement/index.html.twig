@@ -25,19 +25,23 @@
                 </a>
             {% endfor %}#}
         </p>
+        {{ form_start(form) }}
+        {{ form_row(form.category) }}
+        <button type="submit" class="btn btn-info">Rechercher</button>
+        {{ form_end(form) }}
+
         <br>
         <h2 style="font-size: 1.4em" class="mb-5">Quelques exemples de défi que tu peux relever :</h2>
-        <div class="container">
-            <div class="row">
-                {% for achievement in achievements %}
-                    {{ render(controller('App\\Controller\\AchievementController::card', {'achievement' : achievement})) }}
-                {% endfor %}
-                <div class="col-12 d-flex justify-content-center">
-                    <span>
-                        {{ knp_pagination_render(achievements,'@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
-                    </span>
-                </div>
+        <div class="row">
+            {% for achievement in achievements %}
+                {{ render(controller('App\\Controller\\AchievementController::card', {'achievement' : achievement})) }}
+            {% endfor %}
+            <div class="col-12 d-flex justify-content-center">
+                <span>
+                    {{ knp_pagination_render(achievements,'@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
+                </span>
             </div>
         </div>
     </div>
+
 {% endblock %}

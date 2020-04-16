@@ -4,7 +4,7 @@
 {% block body %}
     <div class="row row-edit-form">
         <div class="col-5">
-            <h1 style="font-size: 1.7em" class="mb-4">Enregistrement Catégories</h1>
+            <h1  class="mb-4">Enregistrement Catégories :</h1>
             <div class="edit-form">
                 {{ form_start(form) }}
                 {{ form_row(form.name) }}
@@ -22,7 +22,7 @@
             {{ form_end(form) }}
         </div>
         <div class="col-5 offset-2">
-            <h2 class="text-center" style="font-size: 1.7em">Informations de l'admin</h2>
+            <h2 class="text-center">Informations de l'admin</h2>
             <div class="d-flex justify-content-center">
                 <span>Pseudo : <span class="admin-pseudo">{{ user.username }}</span></span>
             </div>

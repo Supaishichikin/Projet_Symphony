@@ -11,29 +11,26 @@
 
     {% if category.description is not null %}
             <h2  class="h2-category">Description de la Catégorie </h2>
-                <img class="img-thumbnail img-category mr-2" src="http://via.placeholder.com/300x150" alt="">
-                <p class="pt-3">
-
-                        <strong class="category-description">{{ category.description }}</strong> <br><br>
-                        Lorem ipsum dolor sit
-                        amet,consectetur adipisicing elit. Ad aut consequatur, deleniti dolorem eius, et fuga, fugit
-                        harumhic molestiasnostrum praesentium provident quia quod vel? Eos laboriosam quisquam quod.
-                        Atqueaut doloribus, incidunt itaque possimus quidem! A animi assumenda atque dignissimos
-                        distinctio eaque fuga,itaque nisi, odit perferendis quibusdam tempore! Eius omnis provident
-                        ratione vero. Consectetur id maioresvelit.Deleniti dolorum ducimus eaque, ex
-                        expedita magnam mollitia necessitatibus quaerat quasqui sed vero. Aut commodi eius
-                        exercitationem laboriosam magni porro repellat! Amet autem fugit nobis quissit unde,
-                        voluptatibus?
-
-
-                </p>
+            <img class="img-thumbnail img-category mr-2" src="http://via.placeholder.com/300x150" alt="">
+            <p class="pt-3">
+                <strong class="category-description">{{ category.description }}</strong> <br><br>
+                Lorem ipsum dolor sit
+                amet,consectetur adipisicing elit. Ad aut consequatur, deleniti dolorem eius, et fuga, fugit
+                harumhic molestiasnostrum praesentium provident quia quod vel? Eos laboriosam quisquam quod.
+                Atqueaut doloribus, incidunt itaque possimus quidem! A animi assumenda atque dignissimos
+                distinctio eaque fuga,itaque nisi, odit perferendis quibusdam tempore! Eius omnis provident
+                ratione vero. Consectetur id maioresvelit.Deleniti dolorum ducimus eaque, ex
+                expedita magnam mollitia necessitatibus quaerat quasqui sed vero. Aut commodi eius
+                exercitationem laboriosam magni porro repellat! Amet autem fugit nobis quissit unde,
+                voluptatibus?
+            </p>
     {% endif %}
 
     <hr class="mt-4">
 
     <h2 class="h2-category">Activités associées à la catégorie </h2>
-    <a class="btn btn-outline-secondary mb-3" href="{{ path('app_achievement_index') }}">Retour à l'accueil</a>
-    <div class="d-flex">
+
+    <div class="row">
         {% for achievement in achievements %}
             {{ render(controller('App\\Controller\\AchievementController::card', {'achievement' : achievement})) }}
         {% else %}
@@ -41,5 +38,8 @@
         {% endfor %}
     </div>
 
+    <a style="margin-left: 50%" class="btn btn-outline-secondary mb-3" href="{{ path('app_achievement_index') }}">
+        Retour à l'accueil
+    </a>
 
 {% endblock %}

@@ -1,0 +1,36 @@
+/*Admin*/
+
+
+/*Gestion Activité*/
+h1 , h2{
+    font-style: italic;
+    font-size: 1.7em;
+    color: #565656;
+    text-decoration: underline;
+    margin-bottom: 1.7em;
+}
+
+.btn-edit-admin{
+    background-color: #222222 !important;
+    color: #FFFFFF !important;
+}
+
+.row-edit-form{
+    margin-top: 40px;
+}
+.edit-form{
+    padding: 25px;
+    border: 1.7px solid black;
+    border-radius: 7%;
+    background-color: #A3DFF6;
+}
+
+.admin-pseudo{
+    color: #565656;
+    font-weight: lighter;
+    margin-left: 40px;
+}
+.img-admin{
+    position: relative;
+    top: 25px;
+}

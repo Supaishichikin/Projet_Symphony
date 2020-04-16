@@ -38,6 +38,8 @@ CategoryController extends AbstractController
     public function edit(Request $request, EntityManagerInterface $manager, $id)
     {
 
+        $currentUser = $this->getUser();
+
         if(is_null($id)){
             $category = new Category();
         }else{// modification
@@ -71,7 +73,8 @@ CategoryController extends AbstractController
         return $this->render(
             'Admin/category/edit.html.twig',
             [
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'user' => $currentUser
             ]
 
         );

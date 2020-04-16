@@ -1,23 +1,38 @@
-{% extends 'base.html.twig' %}
+{% extends 'Admin/base.html.twig' %}
 
 {% block title %}Gestion catégorie - {{ parent() }}{% endblock %}
 {% block body %}
-    <div class="container">
-        {{ form_start(form) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.description) }}
-        {{ form_row(form.color) }}
-
-        <div class="text-right">
-            <button type="submit" class="btn btn-primary">
-                Enregistrer
-            </button>
-            <a href="{{ path('app_admin_category_index') }}" class="btn btn-outline-secondary">
-                Retour
-            </a>
+    <div class="row row-edit-form">
+        <div class="col-5">
+            <h1 style="font-size: 1.7em" class="mb-4">Enregistrement Catégories</h1>
+            <div class="edit-form">
+                {{ form_start(form) }}
+                {{ form_row(form.name) }}
+                {{ form_row(form.description) }}
+                {{ form_row(form.color) }}
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary">
+                        Enregistrer
+                    </button>
+                    <a href="{{ path('app_admin_category_index') }}" class="btn btn-outline-secondary">
+                        Retour
+                    </a>
+                </div>
+            </div>
+            {{ form_end(form) }}
         </div>
-        {{ form_end(form) }}
+        <div class="col-5 offset-2">
+            <h2 class="text-center" style="font-size: 1.7em">Informations de l'admin</h2>
+            <div class="d-flex justify-content-center">
+                <span>Pseudo : <span class="admin-pseudo">{{ user.username }}</span></span>
+            </div>
+            <div class="d-flex justify-content-center">
+                <img class="img-admin img-thumbnail" src="http://via.placeholder.com/300x250" alt="#peut etre pas nécessaire comme donnée meme pour l'admin">
+            </div>
+        </div>
     </div>
+
+
 {% endblock %}
 
 

@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <title>{% block title %}Un pas après l'autre{% endblock %}</title>
         {% block stylesheets %}
+            <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon/favicon-32x32.png') }}">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
             <link rel="stylesheet" href="{{ asset('style/style.css') }}">
         {% endblock %}
@@ -11,7 +13,7 @@
     <body>
     {% if is_granted('ROLE_ADMIN') %}
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-link text-white" href="{{ path('app_admin_achievement_index') }}">Admin</a>
+            <a class="navbar-brand navbar-link text-white" href="{{ path('app_admin_achievement_index') }}">Admin</a>
             <a class="nav-link text-white" href="{{ path('app_admin_achievement_index') }}">Gestion des Activités</a>
             <a class="nav-link text-white" href="{{ path('app_admin_category_index') }}">Gestion des Catégories</a>
         </nav>
@@ -23,7 +25,7 @@
                     {{ render(controller('App\\Controller\\CategoryController::menu')) }}
                 </div>
                 <div class="ml-auto"></div>
-                <div class="d-flex bd-highlight">
+                <div class="d-flex bd-highlight profile-links">
                     <a href="{{ path('app_profile_index') }}" class="nav-link text-white bd-highlight">Profil</a>
                     <a href="{{ path('app_settings_index') }}" class="nav-link text-white bd-highlight">Paramètres</a>
                     <a href="{{ path('app_index_logout') }}" class="nav-link text-white bd-highlight">Déconnexion</a>
@@ -41,7 +43,7 @@
                             <label for="connexion_password" class="col-form-label-sm">Mot de passe</label>
                             <input id="connexion_password" type="password" name="_password"
                                    class="form-control form-control-sm">
-                            <a href="{{ path('app_index_forgottenpassword') }}">Mot de passe oublié</a>
+                            <a href="{{ path('app_index_forgottenpassword') }}">Mot de passe oublié <i class="fas fa-external-link-alt"></i></a>
                         </div>
 
                         <button type="submit" class="btn btn-success">

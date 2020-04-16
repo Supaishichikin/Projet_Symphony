@@ -2,17 +2,31 @@
 
 {% block title %}{{ app.user ~ ' - ' ~ parent() }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('style/profile.css') }}">
+{% endblock %}
+
 {% block body %}
-    <h1>En cours</h1>
+    <h1>{{ app.user }} - Profil</h1>
     <div class="row">
+        <img src="http://via.placeholder.com/300x300" alt="...">
+    </div>
+    <h5 class="mt-5 see-achievements">Voir les activités en cours <i class="fas fa-chevron-right"></i></h5>
+    <div class="achievements row mt-5">
         {% for achievement in in_progress %}
             {{ render(controller('App\\Controller\\AchievementController::card', {'achievement' : achievement})) }}
         {% endfor %}
     </div>
-    <h1>Complétées</h1>
-    <div class="row">
+    <h5 class="mt-5 see-achievements">Voir les activités terminées <i class="fas fa-chevron-right"></i></h5>
+    <div class="achievements row mt-5">
         {% for achievement in completed %}
             {{ render(controller('App\\Controller\\AchievementController::card', {'achievement' : achievement})) }}
         {% endfor %}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('javascript/profile.js') }}"></script>
 {% endblock %}

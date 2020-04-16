@@ -50,6 +50,10 @@ class SettingsController extends AbstractController
                     $currentUser->setPassword($newEncodedPassword);
                     $manager->persist($currentUser);
                     $manager->flush();
+
+                    $this->addFlash('success', "Le mot de passe a bien été modifié");
+                } else {
+                    $this->addFlash('error', "Le mot de passe actuel est incorrect");
                 }
             } else {
                 $this->addFlash('error', "Le champ n'est pas valide");

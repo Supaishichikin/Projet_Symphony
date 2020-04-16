@@ -54,8 +54,12 @@ class AchievementController extends AbstractController
 
     public function card(UserAchievementRepository $linkRepository, Achievement $achievement)
     {
-
-        $achievement->status = $this->getStatus($achievement, $this->getUser(), $linkRepository);
+        $user = $this->getUser();
+        if ($user) {
+            $achievement->status = $this->getStatus($achievement, $user, $linkRepository);
+        } else {
+            $achievement->status = null;
+        }
 
         return $this->render('achievement/card.html.twig',
             [

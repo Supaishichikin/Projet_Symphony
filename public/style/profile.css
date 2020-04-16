@@ -1,0 +1,24 @@
+.see-achievements {
+    padding-bottom: 10px;
+    border-bottom: 2px solid black;
+    transition: all 0.5s ease-in-out;
+}
+
+.see-achievements:hover {
+    cursor: pointer;
+}
+
+.see-achievements i {
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+
+.rotated {
+    -webkit-transform : rotate(90deg);
+    -moz-transform : rotate(90deg);
+    -ms-transform : rotate(90deg);
+    -o-transform : rotate(90deg);
+    transform : rotate(90deg);
+}

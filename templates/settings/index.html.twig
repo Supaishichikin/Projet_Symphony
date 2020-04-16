@@ -2,12 +2,16 @@
 
 {% block title %}Paramètres - {{ parent() }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('style/settings.css') }}">
+{% endblock %}
 {% block body %}
-    <h1>{{ user.username }} - Paramètres</h1>
+    <h1>Paramètres</h1>
 
-    <div class="card ">
-        <div class="row">
-            <div class="col-1">
+    <div class="card mt-5">
+        <div class="card-body row">
+            <div class="col-2">
                 Pseudo
             </div>
             <div class="col-3">
@@ -19,15 +23,15 @@
                     {{ form_end(pseudoForm) }}
                 </div>
             </div>
-            <div class="col-2 offset-6">
-                <button class="editField">Modifier</button>
+            <div class="col-1 offset-6">
+                <button class="editField btn btn-secondary btn-sm">Modifier</button>
             </div>
         </div>
     </div>
 
     <div class="card mt-5">
-        <div class="row">
-            <div class="col-1">
+        <div class="card-body row">
+            <div class="col-2">
                 Email
             </div>
             <div class="col-3">
@@ -39,15 +43,15 @@
                     {{ form_end(emailForm) }}
                 </div>
             </div>
-            <div class="col-2 offset-6">
-                <button class="editField">Modifier</button>
+            <div class="col-1 offset-6">
+                <button class="editField btn btn-secondary btn-sm">Modifier</button>
             </div>
         </div>
     </div>
 
     <div class="card mt-5">
-        <div class="row">
-            <div class="col-1">
+        <div class="card-body row">
+            <div class="col-2">
                 Mot de passe
             </div>
             <div class="col-3">
@@ -64,13 +68,13 @@
                     {{ form_end(passwordForm) }}
                 </div>
             </div>
-            <div class="col-2 offset-6">
-                <button class="editField">Modifier</button>
+            <div class="col-1 offset-6">
+                <button class="editField btn btn-secondary btn-sm">Modifier</button>
             </div>
         </div>
     </div>
 
-    <a href="{{ path('app_settings_deleteaccount') }}" class="mt-5 btn btn-danger">Supprimer votre compte</a>
+    <a href="{{ path('app_settings_deleteaccount') }}" class="mt-5 btn btn-danger float-md-right">Supprimer votre compte</a>
 
 {% endblock %}
 

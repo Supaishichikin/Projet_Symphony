@@ -13,7 +13,7 @@ class EditEmailType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', TextType::class, ['label' => 'Nouvelle adresse email'])
+            ->add('email', TextType::class, ['label' => false])
         ;
     }
 

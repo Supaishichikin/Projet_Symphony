@@ -1,0 +1,18 @@
+body {
+    background: #91DBC5 !important;
+}
+
+.card {
+    background: #167e82;
+    color: white;
+}
+
+.btn-secondary {
+    border-color: #373c40;
+    background: #F1915E;
+    color: black;
+}
+
+#edit_password_plainPassword_first_help {
+    color: lightgray !important;
+}

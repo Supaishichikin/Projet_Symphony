@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
+use App\Repository\AchievementRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query\ResultSetMapping;
 use RandomLib\Factory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,12 +26,12 @@ class IndexController extends AbstractController
     public function index(Request $request,
                           UserPasswordEncoderInterface $passwordEncoder,
                           EntityManagerInterface $manager,
-                          UserRepository $repository)
+                          UserRepository $repository,
+                          AchievementRepository $achievementRepository)
     {
         if(!is_null($this->getUser())){
             return $this->redirectToRoute("app_achievement_index");
         }
-
         /*
          * Inscription
          */
@@ -70,10 +72,13 @@ class IndexController extends AbstractController
             }
         }
 
+        $randomAchievements = $this->getRandomAchievements($achievementRepository, 3);
+
         return $this->render('index/index.html.twig',
             [
                 'form' => $form->createView(),
-                'last_username' => ''
+                'last_username' => '',
+                'achievements' => $randomAchievements
             ]);
     }
 
@@ -88,10 +93,23 @@ class IndexController extends AbstractController
         }
     }
 
+    private function getRandomAchievements(AchievementRepository $repository, int $amount)
+    {
+        $allAchievements = $repository->findAll();
+        $selectedAchievements = [];
+
+        $index = array_rand($allAchievements, $amount);
+        foreach ($index as $i) {
+            $selectedAchievements[] = $allAchievements[$i];
+        }
+
+        return $selectedAchievements;
+    }
+
     /**
      * @Route("/login")
      */
-    public function login(AuthenticationUtils $authenticationUtils)
+    public function login(AuthenticationUtils $authenticationUtils, AchievementRepository $achievementRepository)
     {
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
@@ -102,10 +120,12 @@ class IndexController extends AbstractController
 
         if(!empty($error)) {
             $this->addFlash('error', 'Identifiants incorrects');
+            $randomAchievements = $this->getRandomAchievements($achievementRepository, 3);
             return $this->render('index/index.html.twig',
                 [
                     'form' => $form->createView(),
-                    'last_username' => $lastUsername
+                    'last_username' => $lastUsername,
+                    'achievements' => $randomAchievements
                 ]);
         } else {
             return $this->redirectToRoute("app_achievement_index");

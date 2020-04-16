@@ -2,9 +2,26 @@
 
 {% block title %}Accueil - {{ parent() }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('style/index.css') }}">
+{% endblock %}
+
 {% block body %}
-    <div class="row mt-5">
-        <div class="col-6 offset-6">
+    <div class="row mt-5 align-items-center">
+        <div class="col-8 mt-5">
+            <h1>Un pas après l'autre</h1>
+            <p>
+                Inscrivez-vous pour compléter toutes sortes de tâches, de la plus anodine à la plus épuisante.
+                Choisissez vos objectifs, à votre rythme, pour ne pas perdre la tête pendant le confinement!
+            </p>
+            <div class="row">
+                {% for achievement in achievements %}
+                    {{ render(controller('App\\Controller\\AchievementController::card', {'achievement' : achievement})) }}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-4 mt-5 register-section">
             <h2>Inscription</h2>
             {{ form_start(form) }}
             {{ form_row(form.pseudo) }}
@@ -12,7 +29,7 @@
             <span id="availability"></span>
             {{ form_row(form.email) }}
             {{ form_row(form.plainPassword) }}
-            <button class="btn btn-success" type="submit">S'inscrire</button>
+            <button class="btn btn-success w-100" type="submit">S'inscrire</button>
             {{ form_end(form) }}
         </div>
 

@@ -1,5 +1,4 @@
 body {
-    /*background: rgba(56,255,193,0.30) !important;*/
     background: #91DBC5 !important;
 }
 
@@ -25,35 +24,38 @@ h2{
 
 .navbar {
     background: #F1915E;
+    padding: 0 0 0 16px;
 }
 
-#connexion-form {
-    width: 25%;
+
+.navbar a {
+    padding: 16px;
+}
+.navbar a.navbar-brand {
+    padding: 13px 0;
 }
 
-#connexion-form label {
-    padding: 0;
-    margin: 0;
-    color: white;
+.profile-links a:nth-child(1) {
+    background: #AF5F1B;
+}
+.profile-links a:nth-child(1):hover {
+    background: #c76b20;
 }
 
-#connexion-form input {
-    height: calc(1em + .5rem + 2px);
+.profile-links a:nth-child(2) {
+    background: #11666A;
+}
+.profile-links a:nth-child(2):hover {
+    background: #167e82;
 }
 
-#connexion-form a {
-    font-size: 0.875rem;
-    float: right;
-    color: white;
+.profile-links a:nth-child(3) {
+    background: #AF1F1B;
+}
+.profile-links a:nth-child(3):hover {
+    background: #c72320;
 }
 
-#connexion-form button {
-    font-size: 0.875rem;
-    height: calc(1.5em + .5rem + 2px);
-    padding: 0 5px;
-    align-self: center;
-    margin-top: 3px;
-}
 
 .btn-success {
     background-color: #7FD152 !important;

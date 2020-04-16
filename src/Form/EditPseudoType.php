@@ -13,7 +13,7 @@ class EditPseudoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('pseudo', TextType::class, ['label' => 'Nouveau pseudo'])
+            ->add('pseudo', TextType::class, ['label' => false])
         ;
     }
 

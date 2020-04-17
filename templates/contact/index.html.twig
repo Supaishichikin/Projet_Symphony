@@ -1,21 +1,30 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('style/contact.css') }}">
+{% endblock %}
 
 {% block body %}
     <h1>Contact</h1>
     <hr>
-    <div style="width: 50%">
-        {{ form_start(form) }}
+    <br>
+    <h2>Faites nous part de votre demande par mail :</h2>
+    <div class="d-flex">
+        <div style="width: 50%">
 
-        {{ form_row(form.name) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.subject) }}
-        {{ form_row(form.body) }}
-        <button type="submit" class="btn btn-primary">
-            Envoyer
-        </button>
-        {{ form_end(form) }}
+            {{ form_start(form) }}
 
+            {{ form_row(form.name) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.subject) }}
+            {{ form_row(form.body) }}
+            <button type="submit" class="btn">
+                Envoyer
+            </button>
+            {{ form_end(form) }}
+        </div>
     </div>
+
 
 {% endblock %}

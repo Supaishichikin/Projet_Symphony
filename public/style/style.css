@@ -82,7 +82,7 @@ h2{
 footer{
     margin-top: 70px;
     height: 160px;
-    background-color: #11666A;
+    background-image: linear-gradient(to top,#167e82,#11666A) ;
 }
 .footer-list{
     list-style: none;

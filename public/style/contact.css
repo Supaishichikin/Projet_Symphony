@@ -1,0 +1,14 @@
+form{
+    background-color: #11666A;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 2%;
+}
+
+form label{
+    color: #FFFFFF;
+}
+
+.form-group + button{
+    background-color: #F1915E;
+}

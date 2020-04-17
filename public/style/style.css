@@ -4,8 +4,7 @@ body {
 
 h1 , h2{
     font-family:Arial, Helvetica, sans-serif;
-    font-weight:lighter;
-    color: #F1915E;
+    color: #167e82;
     /*text-decoration: underline;*/
 }
 
@@ -15,6 +14,7 @@ h1{
 
 h2{
     font-size: 1.7em;
+    font-weight:lighter;
 }
 
 .nav-slim {
@@ -70,10 +70,33 @@ h2{
 }
 
 .btn-search{
-    height: 40px;
-    margin-top: 30px;
+    float: right;
+    margin-top: 15px;
+    margin-left: 5px;
 }
-
+.search-right{
+    float: right;
+    width: 30%;
+}
+#search_achievements_category{
+    width: 100%;
+}
+footer{
+    margin-top: 70px;
+    height: 160px;
+    background-color: #11666A;
+}
+.footer-list{
+    list-style: none;
+}
+.footer-list a{
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.footer-img{
+    width: auto;
+    height: 60px;
+}
 /*access/category/id*/
 hr{
     clear: both;

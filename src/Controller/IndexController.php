@@ -3,11 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ContactType;
 use App\Form\RegistrationType;
 use App\Repository\AchievementRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Query\ResultSetMapping;
 use RandomLib\Factory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -198,5 +198,71 @@ class IndexController extends AbstractController
         $generator = $factory->getMediumStrengthGenerator();
         $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ#?!&-_+";
         return $generator->generateString(20, $characters);
+    }
+
+    /**
+     * @Route("/contact")
+     */
+    public function contact(Request $request, MailerInterface $mailer)
+    {
+        $form = $this->createForm(ContactType::class);
+
+        if(!is_null($this->getUser())){
+            $form->get('name')->setData($this->getUser());
+            $form->get('email')->setData($this->getUser()->getEmail());
+        }
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()){
+            if($form->isValid()){
+                $data = $form->getData();
+
+                $mail = new Email();
+
+                $mailBody = $this->renderView(
+                    'contact/contact_body.html.twig',
+                    [
+                        'data' => $data
+                    ]
+                );
+
+                $mail
+                    ->subject('Nouveau message sur le site')
+                    ->from('julien.demo@gmail.com')
+                    ->to('jordan.toko@outlook.fr')
+                    ->replyTo($data['email'])
+                    ->html($mailBody)
+                ;
+
+                $mailer->send($mail);
+                $this->addFlash('success', 'Votre message à été envoyé');
+            }else {
+                $this->addFlash('error', 'Le formulaire contient des erreurs');
+            }
+        }
+
+        return $this->render(
+            'contact/index.html.twig',
+            [
+                'form' => $form->createView()
+            ]
+        );
+    }
+
+    /**
+     * @Route("/confidentialite")
+     */
+    public function confidentialite()
+    {
+        return $this->render('confidentialite/index.html.twig');
+    }
+
+    /**
+     * @Route("/condition")
+     */
+    public function condition()
+    {
+        return $this->render('condition/index.html.twig');
     }
 }

@@ -12,8 +12,22 @@ h1 , h2{
 }
 
 .btn-edit-admin{
-    background-color: #222222 !important;
+    background-color: #c76b20; !important;
     color: #FFFFFF !important;
+}
+
+.btn-admin-retour{
+    background-color: #c72320;
+    color: #FFFFFF;
+}
+
+.btn-enregistrement{
+    background-color: #F1915E;
+    color: #FFFFFF;
+}
+
+label{
+    color: #FFFFFF;
 }
 
 .row-edit-form{
@@ -22,8 +36,9 @@ h1 , h2{
 .edit-form{
     padding: 25px;
     border: 1.7px solid black;
-    margin-top: 60px;
-    background-color: #FFD37F;
+    border-radius: 5%;
+    margin-top: 50px;
+    background-color: #167e82;
 }
 
 .admin-pseudo{

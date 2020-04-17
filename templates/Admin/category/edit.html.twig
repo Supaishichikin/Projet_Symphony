@@ -11,10 +11,10 @@
                 {{ form_row(form.description) }}
                 {{ form_row(form.color) }}
                 <div class="text-right">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-enregistrement">
                         Enregistrer
                     </button>
-                    <a href="{{ path('app_admin_category_index') }}" class="btn btn-outline-secondary">
+                    <a href="{{ path('app_admin_category_index') }}" class="btn btn-admin-retour">
                         Retour
                     </a>
                 </div>
@@ -27,7 +27,7 @@
                 <span>Pseudo : <span class="admin-pseudo">{{ user.username }}</span></span>
             </div>
             <div class="d-flex justify-content-center">
-                <img class="img-admin img-thumbnail" src="http://via.placeholder.com/300x250" alt="#peut etre pas nécessaire comme donnée meme pour l'admin">
+                <img class="img-admin img-thumbnail" src="http://via.placeholder.com/300x250" alt="...">
             </div>
         </div>
     </div>

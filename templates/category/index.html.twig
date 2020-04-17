@@ -3,32 +3,18 @@
 {% block title %}{{ category.name ~ ' - ' ~ parent() }}{% endblock %}
 
 {% block body %}
-    <h1>Catégorie {{ category.name }}</h1>
-
-    <hr>
-
-
-
+    <h1 class="my-5 border-bottom pb-3">{{ category.name }}</h1>
     {% if category.description is not null %}
-            <h2  class="h2-category">Description de la Catégorie </h2>
+        <div class="mb-5">
+            <h2 class="h2-category">Description</h2>
             <img class="img-thumbnail img-category mr-2" src="http://via.placeholder.com/300x150" alt="">
             <p class="pt-3">
-                <strong class="category-description">{{ category.description }}</strong> <br><br>
-                Lorem ipsum dolor sit
-                amet,consectetur adipisicing elit. Ad aut consequatur, deleniti dolorem eius, et fuga, fugit
-                harumhic molestiasnostrum praesentium provident quia quod vel? Eos laboriosam quisquam quod.
-                Atqueaut doloribus, incidunt itaque possimus quidem! A animi assumenda atque dignissimos
-                distinctio eaque fuga,itaque nisi, odit perferendis quibusdam tempore! Eius omnis provident
-                ratione vero. Consectetur id maioresvelit.Deleniti dolorum ducimus eaque, ex
-                expedita magnam mollitia necessitatibus quaerat quasqui sed vero. Aut commodi eius
-                exercitationem laboriosam magni porro repellat! Amet autem fugit nobis quissit unde,
-                voluptatibus?
+                <strong class="category-description">{{ category.description }}</strong>
             </p>
+        </div>
     {% endif %}
-
-    <hr class="mt-4">
-
-    <h2 class="h2-category">Activités associées à la catégorie </h2>
+    <br>
+    <h2 class="h2-category">Activités</h2>
     <a class="btn btn-outline-secondary mb-5" href="{{ path('app_achievement_index') }}">
         Retour vers l'accueil
     </a>

@@ -4,24 +4,24 @@
 
 {% block body %}
 <div class="row row-edit-form">
-        <div class="col-5">
-            <h1 class="mb-4">Enregistrement d'activitées :</h1>
-            <div class="edit-form">
-                {{ form_start(form) }}
-                {{ form_row(form.name) }}
-                {{ form_row(form.category) }}
-                {{ form_row(form.description) }}
-                <div class="text-right">
-                    <button type="submit" class="btn btn-enregistrement">
-                        Enregistrer
-                    </button>
-                    <a href="{{ path('app_admin_achievement_index')}}" class="btn btn-admin-retour">
-                        Retour
-                    </a>
-                </div>
-                {{ form_end(form) }}
+    <div class="col-5">
+        <h1 class="mb-4">Enregistrement d'activité :</h1>
+        <div class="edit-form">
+            {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.category) }}
+            {{ form_row(form.description) }}
+            <div class="text-right">
+                <button type="submit" class="btn btn-enregistrement">
+                    Enregistrer
+                </button>
+                <a href="{{ path('app_admin_achievement_index')}}" class="btn btn-admin-retour">
+                    Retour
+                </a>
             </div>
+            {{ form_end(form) }}
         </div>
+    </div>
     <div class="col-5 offset-2">
         <h2 class="text-center">Informations de l'admin</h2>
         <div class="d-flex justify-content-center">

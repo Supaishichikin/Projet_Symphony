@@ -7,14 +7,13 @@
     <link rel="stylesheet" href="{{ asset('style/settings.css') }}">
 {% endblock %}
 {% block body %}
-    <h1>Paramètres</h1>
-
+    <h1 class="my-5">Paramètres</h1>
     <div class="card mt-5">
         <div class="card-body row">
-            <div class="col-2">
+            <div class="col-3 col-lg-2">
                 Pseudo
             </div>
-            <div class="col-3">
+            <div class="col-6 col-lg-4 col-xl-3">
                 <span class="currentField">{{ user.username }}</span>
                 <div class="newField d-none">
                     {{ form_start(pseudoForm) }}
@@ -23,7 +22,7 @@
                     {{ form_end(pseudoForm) }}
                 </div>
             </div>
-            <div class="col-1 offset-6">
+            <div class="col-1 offset-lg-4 offset-xl-6">
                 <button class="editField btn btn-secondary btn-sm">Modifier</button>
             </div>
         </div>
@@ -31,10 +30,10 @@
 
     <div class="card mt-5">
         <div class="card-body row">
-            <div class="col-2">
+            <div class="col-3 col-lg-2">
                 Email
             </div>
-            <div class="col-3">
+            <div class="col-6 col-lg-4 col-xl-3">
                 <span class="currentField">{{ user.email }}</span>
                 <div class="newField d-none">
                     {{ form_start(emailForm) }}
@@ -43,7 +42,7 @@
                     {{ form_end(emailForm) }}
                 </div>
             </div>
-            <div class="col-1 offset-6">
+            <div class="col-1 offset-lg-4 offset-xl-6">
                 <button class="editField btn btn-secondary btn-sm">Modifier</button>
             </div>
         </div>
@@ -51,10 +50,10 @@
 
     <div class="card mt-5">
         <div class="card-body row">
-            <div class="col-2">
+            <div class="col-3 col-lg-2">
                 Mot de passe
             </div>
-            <div class="col-3">
+            <div class="col-6 col-lg-4 col-xl-3">
                 <span class="currentField">********************</span>
                 <div class="newField d-none">
                     {{ form_start(passwordForm) }}
@@ -68,13 +67,13 @@
                     {{ form_end(passwordForm) }}
                 </div>
             </div>
-            <div class="col-1 offset-6">
+            <div class="col-1 offset-lg-4 offset-xl-6">
                 <button class="editField btn btn-secondary btn-sm">Modifier</button>
             </div>
         </div>
     </div>
 
-    <a href="{{ path('app_settings_deleteaccount') }}" class="mt-5 btn btn-danger float-md-right">Supprimer votre compte</a>
+    <a href="{{ path('app_settings_deleteaccount') }}" class="mt-5 btn btn-danger float-right">Supprimer votre compte</a>
 
 {% endblock %}
 

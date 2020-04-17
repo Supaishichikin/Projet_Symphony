@@ -72,7 +72,7 @@ class IndexController extends AbstractController
             }
         }
 
-        $randomAchievements = $this->getRandomAchievements($achievementRepository, 3);
+        $randomAchievements = $this->getRandomAchievements($achievementRepository, 6);
 
         return $this->render('index/index.html.twig',
             [
@@ -120,7 +120,7 @@ class IndexController extends AbstractController
 
         if(!empty($error)) {
             $this->addFlash('error', 'Identifiants incorrects');
-            $randomAchievements = $this->getRandomAchievements($achievementRepository, 3);
+            $randomAchievements = $this->getRandomAchievements($achievementRepository, 6);
             return $this->render('index/index.html.twig',
                 [
                     'form' => $form->createView(),

@@ -1,5 +1,5 @@
 {% for category in categories %}
-    <a class="nav-link text-white d-flex justify-content-start" href="{{ path('app_category_index' , {'id': category.id}) }}">
+    <a class="cat-link nav-link text-white" href="{{ path('app_category_index' , {'id': category.id}) }}" style="background: {{ category.color }}">
         {{ category.name }}
     </a>
 {% endfor %}

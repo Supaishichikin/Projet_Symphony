@@ -23,10 +23,14 @@ class ProfileController extends AbstractController
         $completedAchievements = [];
         $startedUserAchievements = $repository->findBy(['user' => $this->getUser()]);
         foreach ($startedUserAchievements as $userAchievement) {
+            $currentAchievement = $userAchievement->getAchievement();
             if (is_null($userAchievement->getEndDate())) {
-                $achievementsInProgress[] = $userAchievement->getAchievement();
+                $achievementsInProgress[] = $currentAchievement;
+                if($userAchievement->getTimescompleted() > 0) {
+                    $completedAchievements[] = $currentAchievement;
+                }
             } else {
-                $completedAchievements[] = $userAchievement->getAchievement();
+                $completedAchievements[] = $currentAchievement;
             }
         }
 

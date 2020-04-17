@@ -3,37 +3,37 @@
 {% block title %}Activités - {{ parent() }} {% endblock %}
 
 {% block body %}
-    <h1>Relève le défi</h1>
-    <hr>
-
-    <div style="width: 50%">
-        <h2>
-            Rentabilise ton temps durant le confinement
-        </h2>
-        <p style="font-size: small" class="mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Consequatur doloribus est excepturi nam natus porro possimus quas voluptas. Harum, perspiciatis voluptatem.
-            Aperiam autem dolorum ea eligendi esse est excepturi expedita id magni nemo,
-            nesciunt non nostrum officiis pariatur quo rerum sunt? Distinctio earum incidunt laudantium molestias optio
-            placeat, quam unde?<br>
-        </p>
+    <h1 class="my-5">Relève le défi</h1>
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <h2>
+                Rentabilise ton temps durant le confinement
+            </h2>
+            <p style="font-size: small" class="mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Consequatur doloribus est excepturi nam natus porro possimus quas voluptas. Harum, perspiciatis voluptatem.
+                Aperiam autem dolorum ea eligendi esse est excepturi expedita id magni nemo,
+                nesciunt non nostrum officiis pariatur quo rerum sunt? Distinctio earum incidunt laudantium molestias optio
+                placeat, quam unde?<br>
+            </p>
+        </div>
     </div>
-
-
-
-    <br>
-
-    <h2 class="mb-5 d-inline-block">Découvre les défis que tu peux relever :</h2>
-
-    <div class="btn-search">
-        {{ form_start(form) }}
-        <button type="submit" class="btn btn-info btn-search d-inline-block">Rechercher</button>
-
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <h2>Découvre les défis que tu peux relever :</h2>
+        </div>
+        <div class="col-12 col-lg-6">
+            {{ form_start(form) }}
+                <div class="row align-items-end">
+                <div class="col-6 category-selection">
+                    {{ form_row(form.category) }}
+                </div>
+                <div class="col-6">
+                    <button type="submit" class="btn btn-info d-inline-block">Rechercher</button>
+                </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
     </div>
-    <div class="search-right">
-        {{ form_row(form.category) }}
-        {{ form_end(form) }}
-    </div>
-
     <div class="row mt-5">
         {% for achievement in achievements %}
             {{ render(controller('App\\Controller\\AchievementController::card', {'achievement' : achievement})) }}

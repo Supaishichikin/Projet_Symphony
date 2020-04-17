@@ -19,14 +19,14 @@ class AchievementType extends AbstractType
             ->add('name',
                 TextType::class,
                 [
-                    'label' => 'Nom du challenge'
+                    'label' => "Nom de l'activité"
                 ]
             )
             ->add(
                 'description',
                 TextareaType::class,
                 [
-                    'label' => 'Description du challenge'
+                    'label' => "Description de l'activité"
                 ]
             )
             ->add(

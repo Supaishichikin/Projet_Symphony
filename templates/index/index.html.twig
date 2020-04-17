@@ -9,7 +9,7 @@
 
 {% block body %}
     <div class="row mt-5 align-items-center">
-        <div id="pitch" class="col-8 mt-5">
+        <div id="pitch" class="col-12 col-lg-8 mt-lg-5">
             <h1>Un pas après l'autre</h1>
             <p>
                 Inscrivez-vous pour compléter toutes sortes de tâches, de la plus anodine à la plus épuisante.
@@ -21,7 +21,7 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="col-4 mt-5">
+        <div id="registration-form" class="col-12 col-lg-4 mt-lg-5">
             <h2>Inscription</h2>
             {{ form_start(form) }}
             {{ form_row(form.pseudo) }}

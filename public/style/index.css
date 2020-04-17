@@ -17,6 +17,16 @@
     height: calc(1em + .5rem + 2px);
 }
 
+.form-check-input {
+    height: auto;
+    margin-top: 0;
+}
+
+.form-check-label {
+    font-size: 0.875rem;
+    position: absolute;
+}
+
 #connexion-form a {
     padding: 0;
     font-size: 0.875rem;
@@ -32,6 +42,6 @@
     margin-top: 3px;
 }
 
-.register-section {
-    border-left: 2px solid black;
+#pitch {
+    border-right: 2px solid black;
 }

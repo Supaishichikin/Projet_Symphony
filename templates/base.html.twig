@@ -38,6 +38,10 @@
                             <label for="connexion_pseudo" class="col-form-label-sm">Pseudo</label>
                             <input id="connexion_pseudo" type="text" name="_username" class="form-control form-control-sm"
                                    value="{{ (last_username is defined) ? last_username : '' }}">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="remember_me" name="_remember_me">
+                                <label class="form-check-label" for="remember_me">Se souvenir de moi</label>
+                            </div>
                         </div>
                         <div class="col-4">
                             <label for="connexion_password" class="col-form-label-sm">Mot de passe</label>

@@ -28,10 +28,13 @@ security:
             form_login:
                 login_path: app_index_index
                 check_path: app_index_login
-                failure_path: app_index_login
+                failure_path: app_index_index
 
             logout:
                 path: app_index_logout
+
+            remember_me:
+                secret: '%kernel.secret%'
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true

@@ -31,12 +31,10 @@ class AchievementController extends AbstractController
         $form = $this->createForm(SearchAchievementsType::class);
         $form->handleRequest($request);
 
-        dump($request->query);
-
         $donnees = $repository->search((array) $form->getData());
-        dump($donnees);
+
         $limit = count($donnees);
-        dump($limit);
+
         $achievements = $paginator->paginate(
             $donnees,
             $request->query->getInt(

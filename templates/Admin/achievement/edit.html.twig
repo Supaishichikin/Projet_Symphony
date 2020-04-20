@@ -11,6 +11,7 @@
             {{ form_row(form.name) }}
             {{ form_row(form.category) }}
             {{ form_row(form.description) }}
+            {{ form_row(form.image) }}
             <div class="text-right">
                 <button type="submit" class="btn btn-enregistrement">
                     Enregistrer
@@ -37,10 +38,12 @@
     <div class="col-12 d-flex justify-content-center">
         <h2 class="mt-3">Quelques exemples de rendu :</h2>
     </div>
-    <div class="col-8 offset-2 d-flex mt-2">
-        {% for achievement in achievements %}
-            {{ render(controller('App\\Controller\\AchievementController::card', {'achievement' : achievement})) }}
-        {% endfor %}
+    <div class="col-10 offset-1 mt-2">
+        <div class="row">
+            {% for achievement in achievements %}
+                {{ render(controller('App\\Controller\\AchievementController::card', {'achievement' : achievement})) }}
+            {% endfor %}
+        </div>
     </div>
 </div>
 
@@ -51,4 +54,14 @@
     </span>
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+        })
+    </script>
 {% endblock %}

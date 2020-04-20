@@ -2,13 +2,13 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('style/index.css') }}">
     <link rel="stylesheet" href="{{ asset('style/cgu.css') }}">
 {% endblock %}
 
 {% block body %}
-    <h1>Condition générale d'utilisation</h1>
+    <h1 class="my-5">Conditions générales d'utilisation</h1>
     <hr>
-    <br>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aspernatur
         magnam magni molestias non odit officia praesentium quaerat quasi qui quibusdam quos rem sint vel!
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus alias architecto aspernatur,
@@ -20,14 +20,14 @@
     <br>
     <h2 class="mt-4 mb-3">1.Objet du site</h2>
     <p>
-        Le site "unpasapreslautre.fr" a pour objet de permettre à ses utilisateurs de réaliser des activitées durant
+        Le site "unpasapreslautre.fr" a pour objet de permettre à ses utilisateurs de réaliser des activités durant
         la période de confinement que nous vivons, au travers des différents défis proposé par le site.
         Répertoriés par catégories, ces défis permettront aux utilisateurs d'investir le temps qu'ils ont à leur
-        disposition pour des activitées de leurs choix.
+        disposition pour des activités de leurs choix.
     </p>
     <hr>
     <h2 class="mt-4 mb-3">2.Création de compte</h2>
-    <p>Les données nécessaire pour créer un compte et utiliser le service, sont l'adresse email, le pseudo de
+    <p>Les données nécessaires pour créer un compte et utiliser le service, sont l'adresse email, le pseudo de
         l'utilisateur et son mot de passe
     </p>
     <hr>

@@ -61,7 +61,7 @@ CategoryController extends AbstractController
 
                 $manager->flush();
 
-                $this->addFlash('success', 'La catégories est enregistrée');
+                $this->addFlash('success', 'La catégorie est enregistrée');
 
                 return $this->redirectToRoute('app_admin_category_index');
 

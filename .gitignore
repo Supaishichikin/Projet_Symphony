@@ -20,3 +20,7 @@
 /.php-version/
 /composer.lock/
 /symfony.lock/
+/public/local_images/
+composer.json
+composer.lock
+symfony.lock

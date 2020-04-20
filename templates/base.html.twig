@@ -66,7 +66,7 @@
                 {# affichage des messages flash #}
                 {% for type, messages in app.session.flashBag.all %}
                     {% for message in messages %}
-                        <div class="alert m-2 alert-{{ type == 'error' ? 'danger' : type }}">
+                        <div class="alert m-2 mt-5 alert-{{ type == 'error' ? 'danger' : type }}">
                             {{ message }}
                         </div>
                     {% endfor %}
@@ -75,18 +75,21 @@
             </div>
         </main>
         <footer>
-            <div style="width: 100%">
-                <ul class="footer-list">
-                    <div class="d-flex justify-content-between w-50 m-auto pt-3">
-                        <li><a href="{{ path('app_index_contact') }}">Contact</a></li>
-                        <li><a href="{{ path('app_index_confidentialite') }}">Politique de confidentialité</a></li>
-                        <li><a href="{{ path('app_index_condition') }}">Conditions d'utilisation</a></li>
+            <div class="container">
+                <div class="row py-3 mb-2">
+                    <div class="text-center col-4">
+                        <a href="{{ path('app_index_contact') }}">Contact</a>
                     </div>
-                </ul>
-                <hr>
-            </div>
-            <div class="d-flex justify-content-center">
-                <a href="{{ path('app_achievement_index') }}"><img class="footer-img" src="{{ asset('favicon/apple-touch-icon.png') }}" alt="#"></a>
+                    <div class="text-center col-4">
+                        <a href="{{ path('app_index_confidentialite') }}">Politique de confidentialité</a>
+                    </div>
+                    <div class="text-center col-4">
+                        <a href="{{ path('app_index_condition') }}">Conditions d'utilisation</a>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <a href="{{ path('app_achievement_index') }}"><img class="footer-img" src="{{ asset('favicon/apple-touch-icon.png') }}" alt="#"></a>
+                </div>
             </div>
         </footer>
         {% block javascripts %}

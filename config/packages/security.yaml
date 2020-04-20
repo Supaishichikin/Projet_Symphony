@@ -28,7 +28,7 @@ security:
             form_login:
                 login_path: app_index_index
                 check_path: app_index_login
-                failure_path: app_index_index
+#                failure_path: app_index_index
 
             logout:
                 path: app_index_logout
@@ -43,5 +43,4 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
-         #- { path: ^/profile, roles: ROLE_USER }
          - { path: ^/access, roles: ROLE_USER }

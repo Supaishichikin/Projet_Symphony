@@ -1,6 +1,9 @@
 <div class="col-12 col-sm-6 col-lg-4 text-center d-flex justify-content-center">
     <div class="card mb-3 border-card" style="width: 18rem;border-color:{{ achievement.category.color }};">
-        <img src="http://via.placeholder.com/200x150" class="card-img-top" alt="...">
+        <div class="card-img-top"
+             style='background-image: url("{{ achievement.image is not null ? asset('local_images/' ~ achievement.image)
+                                                                            : 'http://via.placeholder.com/200x150' }}")'>
+        </div>
         <div class="card-body">
             <h5 class="card-title">{{ achievement.name }}</h5>
             <p class="card-text">{{ achievement.description}}</p>

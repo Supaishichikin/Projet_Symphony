@@ -2,16 +2,15 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('style/index.css') }}">
     <link rel="stylesheet" href="{{ asset('style/contact.css') }}">
 {% endblock %}
 
 {% block body %}
-    <h1>Contact</h1>
-    <hr>
-    <br>
+    <h1 class="my-5">Contact</h1>
     <h2>Faites nous part de votre demande par mail :</h2>
-    <div class="d-flex">
-        <div style="width: 50%">
+    <div class="row contact-form">
+        <div class="col-12 col-md-6">
 
             {{ form_start(form) }}
 

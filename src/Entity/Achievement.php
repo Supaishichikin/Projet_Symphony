@@ -42,6 +42,15 @@ class Achievement
      */
     private $userAchievements;
 
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\File(mimeTypes={"image/png", "image/jpeg"},
+     *     mimeTypesMessage="Le fichier doit être un JPG ou un PNG",
+     *     maxSize="600k",
+     *     maxSizeMessage="Le fichier ne doit pas dépasser {{ limit }} Mo")
+     */
+    private $image;
+
     public function __construct()
     {
         $this->userAchievements = new ArrayCollection();
@@ -115,6 +124,18 @@ class Achievement
                 $userAchievement->setAchievement(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

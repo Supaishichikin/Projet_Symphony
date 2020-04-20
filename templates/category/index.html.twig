@@ -23,7 +23,7 @@
         {% for achievement in achievements %}
             {{ render(controller('App\\Controller\\AchievementController::card', {'achievement' : achievement})) }}
         {% else %}
-            <p>Aucune activité associées</p>
+            <p>Aucune activité associée</p>
         {% endfor %}
     </div>
 

@@ -13,6 +13,12 @@ body {
     color: black;
 }
 
+.btn-secondary:hover {
+    background: #F1915E;
+    color: black;
+    filter: brightness(90%);
+}
+
 #edit_password_plainPassword_first_help {
     color: lightgray !important;
 }

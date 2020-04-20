@@ -111,22 +111,10 @@ class IndexController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils, AchievementRepository $achievementRepository)
     {
-        $user = new User();
-        $form = $this->createForm(RegistrationType::class, $user);
-//         Fait la connexion ET récupère une potentielle erreur
         $error = $authenticationUtils->getLastAuthenticationError();
-
-        $lastUsername = $authenticationUtils->getLastUsername();
-
         if(!empty($error)) {
             $this->addFlash('error', 'Identifiants incorrects');
-            $randomAchievements = $this->getRandomAchievements($achievementRepository, 6);
-            return $this->render('index/index.html.twig',
-                [
-                    'form' => $form->createView(),
-                    'last_username' => $lastUsername,
-                    'achievements' => $randomAchievements
-                ]);
+            return $this->redirectToRoute("app_index_index");
         } else {
             return $this->redirectToRoute("app_achievement_index");
         }

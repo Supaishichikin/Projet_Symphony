@@ -1,12 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('style/index.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Politique de confidentialité</h1>
-    <hr>
-    <br>
-    <div class="d-flex">
-        <p style="width: 50%">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aspernatur
+    <h1 class="my-5">Politique de confidentialité</h1>
+    <div class="row">
+        <p class="col-12 col-md-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aspernatur
             magnam magni molestias non odit officia praesentium quaerat quasi qui quibusdam quos rem sint vel!
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus alias architecto aspernatur,
             autem consequatur cumque delectus deleniti dicta, illum magni maxime minima molestias natus non officia
@@ -18,8 +20,11 @@
             pariatur quod vel? Blanditiis consequatur deleniti, deserunt eligendi explicabo fugit iure, laudantium maxime
             omnis placeat quibusdam ratione sapiente  assumenda, facilis fuga inventore iure voluptate.
         </p>
-        <img class="img-thumbnail" style="width: 40%; height: auto; margin-left: 10%;"
-             src="{{ asset('img/confidentialite.png') }}" alt="..">
+        <div class="col-12 col-md-6">
+            <img class="img-thumbnail"
+                 src="{{ asset('img/confidentialite.png') }}" alt="..">
+        </div>
+
     </div>
 
 {% endblock %}

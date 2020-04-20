@@ -44,23 +44,14 @@ h2{
 .profile-links a:nth-child(1) {
     background: #AF5F1B;
 }
-/*.profile-links a:nth-child(1):hover {*/
-/*    background: #c76b20;*/
-/*}*/
 
 .profile-links a:nth-child(2) {
     background: #11666A;
 }
-/*.profile-links a:nth-child(2):hover {*/
-/*    background: #167e82;*/
-/*}*/
 
 .profile-links a:nth-child(3) {
     background: #AF1F1B;
 }
-/*.profile-links a:nth-child(3):hover {*/
-/*    background: #c72320;*/
-/*}*/
 
 
 .btn-success {
@@ -75,8 +66,22 @@ h2{
     border:  8px solid ;
 }
 
+.card-img-top {
+    height: 200px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
 .category-selection .form-group{
     margin-bottom: 0;
+}
+
+.detail_img {
+    min-height: 300px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
 }
 
 footer{
@@ -84,13 +89,16 @@ footer{
     height: 160px;
     background-image: linear-gradient(to top,#167e82,#11666A) ;
 }
-.footer-list{
-    list-style: none;
-}
-.footer-list a{
+
+footer a, footer a:hover{
     color: #FFFFFF;
     text-decoration: none;
 }
+
+footer .row:first-child {
+    border-bottom: 1px solid gray;
+}
+
 .footer-img{
     width: auto;
     height: 60px;

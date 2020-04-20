@@ -3,17 +3,24 @@
 {% block title %}{{ achievement.name ~ ' - ' ~ parent()}}{% endblock %}
 
 {% block body %}
-    <a href="{{ path('app_achievement_index') }}" class="btn btn-outline-secondary mt-5">
-        Retour vers l'accueil
-    </a>
-    <br><br>
-    <h1>{{ achievement.name }}</h1>
-    <img src="http://via.placeholder.com/300x250" alt="image de description" class="">
-    <br><br>
-    <p>{{ achievement.description }}</p>
-    <a href="{{ path('app_achievement_processachievement', {"id" : achievement.id}) }}" class="btn {{ status.class }}">
-        {{ status.message }}
-    </a>
-    <small class="ml-3">Cette activité à été complétée {{ times_completed }} fois</small>
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <a href="{{ path('app_achievement_index') }}" class="btn btn-outline-secondary mt-5">
+                Retour vers l'accueil
+            </a>
+            <br><br>
+            <h1>{{ achievement.name }}</h1>
+            <div class="detail_img"
+                 style='background-image: url("{{ achievement.image is not null ? asset('local_images/' ~ achievement.image)
+                 : 'http://via.placeholder.com/600*400' }}")'>
+            </div>
+            <p>{{ achievement.description }}</p>
+            <a href="{{ path('app_achievement_processachievement', {"id" : achievement.id}) }}" class="btn {{ status.class }}">
+                {{ status.message }}
+            </a>
+            <small class="ml-3">Cette activité à été complétée {{ times_completed }} fois</small>
+        </div>
+    </div>
+
 {% endblock %}
 

@@ -8,6 +8,8 @@ use App\Repository\AchievementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
@@ -55,6 +57,8 @@ class AchievementController extends AbstractController
 
         $currentUser = $this->getUser();
 
+        $originalImage = null;
+
         if(is_null($id)) { // création
             $achievement = new Achievement();
         } else {
@@ -63,6 +67,13 @@ class AchievementController extends AbstractController
             if(is_null($achievement)){
                 throw new NotFoundHttpException();
             }
+
+            if(!is_null($achievement->getImage())){
+                $originalImage = $achievement->getImage();
+                $achievement->setImage(
+                  new File($this->getParameter('upload_dir') . '/' . $originalImage)
+                );
+            }
         }
 
         $form = $this->createForm(AchievementType::class, $achievement);
@@ -70,10 +81,29 @@ class AchievementController extends AbstractController
         // dump($achievement);
         if($form->isSubmitted()){
             if($form->isValid()) {
+                /** @var UploadedFile|null $image */
+                $image = $achievement->getImage();
+
+                if(!is_null($image)) {
+                    $filename = uniqid() . '.' . $image->guessExtension();
+
+                    $image->move(
+                        $this->getParameter('upload_dir'),
+                        $filename
+                    );
+                    $achievement->setImage($filename);
+
+                    if(!is_null($originalImage)) {
+                        unlink($this->getParameter('upload_dir') . '/' . $originalImage);
+                    }
+                } else {
+                    $achievement->setImage($originalImage);
+                }
+
                 $manager->persist($achievement);
                 $manager->flush();
 
-                $this->addFlash('success', "Le challenge est enregistré");
+                $this->addFlash('success', "L'activité est enregistrée");
 
                 return $this->redirectToRoute('app_admin_achievement_index');
             } else {

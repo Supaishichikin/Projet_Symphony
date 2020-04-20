@@ -4,7 +4,7 @@
 
 {% block body %}
 <h1>Gestion Activités</h1>
-<a href="{{ path('app_admin_achievement_edit') }}" class="btn btn-outline-secondary">Ajouter un Challenge</a>
+<a href="{{ path('app_admin_achievement_edit') }}" class="btn btn-outline-secondary">Créer une activité</a>
 <table class="table table-striped mt-2">
     <thead class="thead-dark">
         <tr class="table-dark">
@@ -23,7 +23,7 @@
             <td>{{ achievement.description }}</td>
             <td>
                 <a href="{{ path('app_admin_achievement_edit', {'id': achievement.id}) }}" class="btn btn-edit-admin">Modifier</a>
-                <a href="{{ path('app_admin_achievement_delte', {'id': achievement.id}) }}" class="btn btn-danger">Suprimer</a>
+                <a href="{{ path('app_admin_achievement_delte', {'id': achievement.id}) }}" class="mt-1 btn btn-danger">Supprimer</a>
             </td>
         </tr>
     {% endfor %}

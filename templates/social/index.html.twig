@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Social - {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('style/social.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="row mt-5">
+        <div class="col-12 col-lg-6">
+            <h1>Rechercher des amis</h1>
+            <form method="post">
+                <div class="form-group">
+                    <label for="search_field">Rechercher par pseudo</label>
+                    <input class="form-control" id="search_field" name="search_field" value="{{ searchFilter }}">
+                </div>
+                <button class="btn btn-secondary">Rechercher</button>
+            </form>
+            <ul class="list-group mt-3">
+                {% for user in searchUserList %}
+                    {% if user != app.user %}
+                        <li class="list-group-item">
+                            {{ user.pseudo }}
+                            {% if user.status.message == "Réponse" %}
+                                <div class="float-right">
+                                    <a href="{{ path('app_social_processfriendship', {'id' : user.id, 'choice' : 'accept'}) }}" class="btn btn-success btn-sm">Accepter la demande</a>
+                                    <a href="{{ path('app_social_processfriendship', {'id' : user.id, 'choice' : 'refuse'}) }}" class="btn btn-danger btn-sm">Refuser la demande</a>
+                                </div>
+                            {% else %}
+                                <a href="{{ (user.status.disabled == '') ?
+                                        path('app_social_processfriendship', {'id' : user.id})
+                                        : '#' }}"
+                                   class="btn btn-sm float-right {{ user.status.class }}" {{ user.status.disabled }}>
+                                    {{ user.status.message }}
+                                </a>
+                            {% endif %}
+                        </li>
+                    {% endif %}
+                {% else %}
+                    Aucun utilisateur ne correspond à cette recherche
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-12 col-lg-6">
+            <div class="mt-3 mt-lg-0 friendslist">
+                <h2>Liste d'amis</h2>
+                <ul class="list-group mb-2">
+                    {% for user in friendsList %}
+                        <li class="list-group-item">
+                            {{ user.pseudo }}
+                            <a href="{{ path('app_social_processfriendship', {'id' : user.id}) }}"
+                               class="btn btn-sm float-right btn-danger" >Retirer de la liste d'amis</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <span>
+                    {{ knp_pagination_render(friendsList,'@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
+                </span>
+            </div>
+            <div class="mt-2 pt-2 border-top friendrequests">
+                <h2>Demandes d'ami</h2>
+                <ul class="list-group">
+                    {% for user in requestingUsers %}
+                        <li class="list-group-item">
+                            {{ user.pseudo }}
+                            <div class="float-right">
+                                <a href="{{ path('app_social_processfriendship', {'id' : user.id, 'choice' : 'accept'}) }}"
+                                   class="btn btn-success btn-sm">Accepter la demande</a>
+                                <a href="{{ path('app_social_processfriendship', {'id' : user.id, 'choice' : 'refuse'}) }}"
+                                   class="btn btn-danger btn-sm">Refuser la demande</a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

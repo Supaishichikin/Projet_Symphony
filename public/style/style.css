@@ -42,14 +42,18 @@ h2{
 }
 
 .profile-links a:nth-child(1) {
-    background: #AF5F1B;
+    background: gray;
 }
 
 .profile-links a:nth-child(2) {
-    background: #11666A;
+    background: #AF5F1B;
 }
 
 .profile-links a:nth-child(3) {
+    background: #11666A;
+}
+
+.profile-links a:nth-child(4) {
     background: #AF1F1B;
 }
 

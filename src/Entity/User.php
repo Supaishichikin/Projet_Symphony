@@ -59,9 +59,21 @@ class User implements UserInterface
      */
     private $userAchievements;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Friendship", mappedBy="requestingUser", orphanRemoval=true)
+     */
+    private $requestedFriendships;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Friendship", mappedBy="requestedUser", orphanRemoval=true)
+     */
+    private $friendshipRequests;
+
     public function __construct()
     {
         $this->userAchievements = new ArrayCollection();
+        $this->requestedFriendships = new ArrayCollection();
+        $this->friendshipRequests = new ArrayCollection();
     }
 
     public function __toString(): ?string
@@ -191,6 +203,68 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($userAchievement->getUser() === $this) {
                 $userAchievement->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Friendship[]
+     */
+    public function getRequestedFriendships(): Collection
+    {
+        return $this->requestedFriendships;
+    }
+
+    public function addRequestedFriendship(Friendship $requestedFriendship): self
+    {
+        if (!$this->requestedFriendships->contains($requestedFriendship)) {
+            $this->requestedFriendships[] = $requestedFriendship;
+            $requestedFriendship->setRequestingUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequestedFriendship(Friendship $requestedFriendship): self
+    {
+        if ($this->requestedFriendships->contains($requestedFriendship)) {
+            $this->requestedFriendships->removeElement($requestedFriendship);
+            // set the owning side to null (unless already changed)
+            if ($requestedFriendship->getRequestingUser() === $this) {
+                $requestedFriendship->setRequestingUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Friendship[]
+     */
+    public function getFriendshipRequests(): Collection
+    {
+        return $this->friendshipRequests;
+    }
+
+    public function addFriendshipRequest(Friendship $friendshipRequest): self
+    {
+        if (!$this->friendshipRequests->contains($friendshipRequest)) {
+            $this->friendshipRequests[] = $friendshipRequest;
+            $friendshipRequest->setRequestedUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFriendshipRequest(Friendship $friendshipRequest): self
+    {
+        if ($this->friendshipRequests->contains($friendshipRequest)) {
+            $this->friendshipRequests->removeElement($friendshipRequest);
+            // set the owning side to null (unless already changed)
+            if ($friendshipRequest->getRequestedUser() === $this) {
+                $friendshipRequest->setRequestedUser(null);
             }
         }
 

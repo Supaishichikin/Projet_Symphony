@@ -8,6 +8,7 @@ use App\Entity\UserAchievement;
 use App\Form\AchievementType;
 use App\Form\SearchAchievementsType;
 use App\Repository\AchievementRepository;
+use App\Repository\FriendshipRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Repository\UserAchievementRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,8 +33,6 @@ class AchievementController extends AbstractController
         $form->handleRequest($request);
 
         $donnees = $repository->search((array) $form->getData());
-
-        $limit = count($donnees);
 
         $achievements = $paginator->paginate(
             $donnees,
@@ -68,7 +67,12 @@ class AchievementController extends AbstractController
     /**
      * @Route("/detail/{id}", requirements={"id" : "\d+"})
      */
-    public function detail(AchievementRepository $repository,UserAchievementRepository $linkRepository, $id)
+    public function detail(AchievementRepository $repository,
+                           UserAchievementRepository $linkRepository,
+                           FriendshipRepository $friendshipRepository,
+                           PaginatorInterface $paginator,
+                           Request $request,
+                           $id)
     {
         $achievement = $repository->findOneBy(['id' => $id]);
         $user = $this->getUser();
@@ -81,12 +85,40 @@ class AchievementController extends AbstractController
                 ->getTimescompleted();
         }
 
+        $getFriends = [];
+
+        $getFriendships1 = $friendshipRepository->findBy(['requestingUser' => $user, 'status' => 'accepted']);
+        $getFriendships2 = $friendshipRepository->findBy(['requestedUser' => $user  , 'status' => 'accepted']);
+
+        foreach ($getFriendships1 as $friendship) {
+            $getFriends[] = $friendship->getRequestedUser();
+        }
+        foreach ($getFriendships2 as $friendship) {
+            $getFriends[] = $friendship->getRequestingUser();
+        }
+
+        $friendsHavingCompleted = [];
+        foreach ($getFriends as $friend) {
+            $userAchievement = $linkRepository->findOneBy(['user' => $friend, 'achievement' => $achievement]);
+            if(!is_null($userAchievement) && $userAchievement->getTimescompleted() > 0) {
+                $friendsHavingCompleted[] = $friend;
+            }
+        }
+
+
+        $friendsList = $paginator->paginate(
+            $getFriends,
+            $request->query->getInt('page', 1),
+            10
+        );
+
         return $this->render(
             'achievement/detail.html.twig',
             [
                 'achievement' => $achievement,
                 'status' => $status,
-                'times_completed' => $timesCompleted
+                'times_completed' => $timesCompleted,
+                'friendsList' => $friendsHavingCompleted
             ]
         );
     }

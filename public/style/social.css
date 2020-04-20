@@ -1,0 +1,9 @@
+a[disabled]:hover {
+    cursor: default;
+    background: #6c757d;
+    border-color: #6c757d;
+}
+
+.friendslist {
+    min-height: 300px;
+}

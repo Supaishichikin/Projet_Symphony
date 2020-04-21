@@ -1,9 +1,15 @@
 {% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('style/index.css') }}">
+{% endblock %}
+
 {% block title %}Accès interdit - {{ parent() }}{% endblock %}
 {% block body %}
     <h1 class="mt-5">Vous n'avez pas l'autorisation d'accéder à cette page</h1>
     <p class="mt-5">
-        Si vous souhaitez devenir admin, veuillez nous contacter. Si vous avez la flemme, vous pouvez
-        cliquer <a href="{{ path('app_achievement_index') }}">ici</a> pour revenir à l'accueil.
+        Si vous souhaitez devenir admin, veuillez nous <a href="{{ path('app_index_contact') }}">contacter</a>.
+        Si vous avez la flemme, vous pouvez cliquer <a href="{{ path('app_achievement_index') }}">ici</a> pour revenir à l'accueil.
     </p>
 {% endblock %}

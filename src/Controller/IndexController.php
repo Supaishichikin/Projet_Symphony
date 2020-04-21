@@ -137,6 +137,10 @@ class IndexController extends AbstractController
                                       UserPasswordEncoderInterface $passwordEncoder,
                                       EntityManagerInterface $manager)
     {
+        if(!is_null($this->getUser())) {
+            return $this->redirectToRoute('app_achievement_index');
+        }
+
         if ($request->request->has('emailForReset')) {
             $emailForReset = $request->request->get('emailForReset');
             $user = $repository->findOneBy(['email' => $emailForReset]);
@@ -217,8 +221,8 @@ class IndexController extends AbstractController
 
                 $mail
                     ->subject('Nouveau message sur le site')
-                    ->from('julien.demo@gmail.com')
-                    ->to('jordan.toko@outlook.fr')
+                    ->from('daviet.charles@gmail.com')
+                    ->to('cdaviet@protonmail.com')
                     ->replyTo($data['email'])
                     ->html($mailBody)
                 ;

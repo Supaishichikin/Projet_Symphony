@@ -47,13 +47,8 @@ class AchievementController extends AbstractController
                          PaginatorInterface $paginator, $id)
     {
 
-        $donnees = $repository->findBy([], ['id' => 'ASC']);
-        $achievements = $paginator->paginate(
-            $donnees,
-            $request->query->getInt(
-                'page', 1),
-            3
-        );
+        $donnees = $repository->findBy([], ['id' => 'ASC'], 12);
+
 
         $currentUser = $this->getUser();
 
@@ -68,6 +63,10 @@ class AchievementController extends AbstractController
                 throw new NotFoundHttpException();
             }
 
+            $currentIndex = array_search($achievement, $donnees);
+            if (!$currentIndex) {
+                unset($donnees[$currentIndex]);
+            }
             if(!is_null($achievement->getImage())){
                 $originalImage = $achievement->getImage();
                 $achievement->setImage(
@@ -75,6 +74,17 @@ class AchievementController extends AbstractController
                 );
             }
         }
+
+        /*
+         * Formatage pour la pagination
+         */
+
+        $achievements = $paginator->paginate(
+            $donnees,
+            $request->query->getInt(
+                'page', 1),
+            3
+        );
 
         $form = $this->createForm(AchievementType::class, $achievement);
         $form->handleRequest($request);
@@ -125,12 +135,14 @@ class AchievementController extends AbstractController
     /**
      * @Route("/suppression/{id}", requirements={"id": "\d+"})
      */
-    public function delte(EntityManagerInterface $manager, Achievement $achievement)
+    public function delete(EntityManagerInterface $manager, Achievement $achievement)
     {
+        unlink($this->getParameter('upload_dir') . '/' . $achievement->getImage());
+
         $manager->remove($achievement);
         $manager->flush();
 
-        $this->addFlash('success', "Le challenge est supprimé");
+        $this->addFlash('success', "L'activité est supprimée");
 
         return $this->redirectToRoute('app_admin_achievement_index');
     }

@@ -1,4 +1,10 @@
 {% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('style/index.css') }}">
+{% endblock %}
+
 {% block title %}Page non trouvée - {{ parent() }}{% endblock %}
 {% block body %}
     <h1 class="mt-5">Cette page n'existe pas!</h1>

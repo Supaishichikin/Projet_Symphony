@@ -5,8 +5,8 @@
 {% block body %}
     <div class="row align-items-center">
         <div class="col-12 col-lg-6">
-            <a href="{{ path('app_achievement_index') }}" class="btn btn-outline-secondary mt-5">
-                Retour vers l'accueil
+            <a href="{{ path('app_achievement_index') }}" class="btn btn-outline-secondary btn-sm mt-5">
+                Retour à l'accueil
             </a>
             <br><br>
             <h1>{{ achievement.name }}</h1>
@@ -25,8 +25,10 @@
             <ul class="list-group">
                 {% for user in friendsList %}
                     <li class="list-group-item">
-                        {{ user.username }} a <span class="text-success">complété la tâche ✓</span>
+                        {{ user.username }} a <span class="text-success">complété l'activité ✓</span>
                     </li>
+                {% else %}
+                    Aucun ami n'a complété cette activité pour l'instant
                 {% endfor %}
             </ul>
         </div>

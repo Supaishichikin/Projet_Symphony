@@ -23,7 +23,7 @@
             <td>{{ achievement.description }}</td>
             <td>
                 <a href="{{ path('app_admin_achievement_edit', {'id': achievement.id}) }}" class="btn btn-edit-admin">Modifier</a>
-                <a href="{{ path('app_admin_achievement_delte', {'id': achievement.id}) }}" class="mt-1 btn btn-danger">Supprimer</a>
+                <a href="{{ path('app_admin_achievement_delete', {'id': achievement.id}) }}" class="mt-1 btn btn-danger">Supprimer</a>
             </td>
         </tr>
     {% endfor %}

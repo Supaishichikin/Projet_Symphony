@@ -1,8 +1,14 @@
 {% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('style/index.css') }}">
+{% endblock %}
+
 {% block title %}Erreur - {{ parent() }}{% endblock %}
 {% block body %}
-    <h1>Toutes nos excuses, une erreur est survenue</h1>
-    <p class="mt-5">
+    <h1 class="my-5">Toutes nos excuses, une erreur est survenue</h1>
+    <p>
         Une erreur inattendue est survenue. Vous pouvez
         cliquer <a href="{{ path('app_achievement_index') }}">ici</a> pour revenir à l'accueil.
     </p>

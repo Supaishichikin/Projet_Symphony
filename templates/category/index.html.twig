@@ -3,7 +3,10 @@
 {% block title %}{{ category.name ~ ' - ' ~ parent() }}{% endblock %}
 
 {% block body %}
-    <h1 class="my-5 border-bottom pb-3">{{ category.name }}</h1>
+    <h1 class="mt-5 border-bottom pb-3">{{ category.name }}</h1>
+    <a href="{{ path('app_achievement_index') }}" class="btn btn-outline-secondary btn-sm mt-5">
+        Retour à l'accueil
+    </a>
     {% if category.description is not null %}
         <div class="mb-5">
             <h2 class="h2-category">Description</h2>
@@ -16,9 +19,6 @@
     <br>
     <br>
     <h2 class="h2-category">Activités</h2>
-    <a class="btn btn-outline-secondary mb-5" href="{{ path('app_achievement_index') }}">
-        Retour vers l'accueil
-    </a>
     <div class="row">
         {% for achievement in achievements %}
             {{ render(controller('App\\Controller\\AchievementController::card', {'achievement' : achievement})) }}
